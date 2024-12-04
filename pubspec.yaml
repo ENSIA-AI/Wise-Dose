@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  flutter_svg: any
   flutter:
     sdk: flutter
 
@@ -90,6 +91,7 @@ flutter:
   # see https://flutter.dev/to/font-from-package
   assets:
     - assets/images/Logo.png
+    - assets/images/Logo.svg
 
 
   fonts:
