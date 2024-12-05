@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'colors.dart';
 
-
 //Paragraph text styling
 const paragraphText = TextStyle(
   fontSize: 12,
@@ -24,7 +23,6 @@ const orangeBoldParagraphText = TextStyle(
   fontWeight: FontWeight.w700,
   color: orange,
 );
-
 
 //Title text style
 const titleText = TextStyle(
@@ -49,26 +47,31 @@ const orangeBoldTitleText = TextStyle(
   color: orange,
 );
 
-
 // Header text style
 const headerText = TextStyle(
-  fontSize: 16,
+  fontSize: 24,
   color: darkBlue,
 );
 
 const boldHeaderText = TextStyle(
-  fontSize: 16,
+  fontSize: 24,
   fontWeight: FontWeight.w700,
   color: darkBlue,
 );
 
 const orangeHeaderText = TextStyle(
-  fontSize: 16,
+  fontSize: 24,
   color: orange,
 );
 
 const orangeBoldHeaderText = TextStyle(
-  fontSize: 16,
+  fontSize: 24,
   fontWeight: FontWeight.w700,
   color: orange,
+);
+
+const greyBoldHeaderText = TextStyle(
+  fontSize: 24,
+  fontWeight: FontWeight.w700,
+  color: grey
 );
