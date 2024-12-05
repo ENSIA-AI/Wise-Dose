@@ -117,9 +117,7 @@ class _HistoryState extends State<History> {
           SizedBox(height: 12),
           Row(
             children: [
-              SvgPicture.asset(
-                'assets/icons/clock.svg',
-              ),
+              SvgPicture.asset("assets/icons/Clock.svg"),
               SizedBox(width: 8),
               Text(
                 'From:',
