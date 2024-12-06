@@ -43,14 +43,14 @@ class _LoginState extends State<Login> {
                     }
                     return null;
                   }),
-                  const SizedBox(height: 30,),
+                  const SizedBox(height: 20,),
                   CustomTextFormField(label: "Password", hint: "Password", validate: (value){
                     if(value == null || value == "a"){
                       return "aaaaa error";
                     }
                     return null;
                   }),
-                  const SizedBox(height: 30,),
+                  const SizedBox(height: 20,),
                   Row(
                         children: [
                           Expanded(
@@ -75,7 +75,7 @@ class _LoginState extends State<Login> {
                           const Text("Forgot password?",  style: orangeParagraphText,)
                         ]
                       ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 20),
                   GradientButton(onPressed: (){
                     _formGlobalKey.currentState!.validate();
                   }, 
@@ -84,9 +84,9 @@ class _LoginState extends State<Login> {
                 ],
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
             const AlternativeLogin(),
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
             const Text("Don't have an account?", style: TextStyle(
                 fontSize: 14,
                 color: darkBlue
