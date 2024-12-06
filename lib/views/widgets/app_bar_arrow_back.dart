@@ -2,8 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wise_dose/views/themes/style_simple/colors.dart';
 
-Widget getAppBarArrowBack() {
+Widget getAppBarArrowBack(BuildContext context) {
   return Container(
     height: 100,
     child: ClipRRect(
@@ -44,8 +45,11 @@ Widget getAppBarArrowBack() {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(
-                  Icons.arrow_back
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Icon(Icons.arrow_back, color: darkBlue,),
                 ),
                 Image.asset('assets/images/Logo.png'),
                 SvgPicture.asset("assets/icons/Reminder.svg")
