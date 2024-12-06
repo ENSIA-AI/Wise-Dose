@@ -24,7 +24,6 @@ class _HistoryState extends State<History> {
           // Fixed AppBar
           getAppBar(),
           SizedBox(height: 36),
-          // Fixed "Completed" & "On Going" Container
           Container(
             padding: EdgeInsets.symmetric(horizontal: 60),
             height: 36,

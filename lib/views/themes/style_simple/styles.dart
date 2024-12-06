@@ -47,6 +47,29 @@ const orangeBoldTitleText = TextStyle(
   color: orange,
 );
 
+//Standard text style
+const standardText = TextStyle(
+  fontSize: 18,
+  color: darkBlue,
+);
+
+const boldStandardText = TextStyle(
+  fontSize: 18,
+  fontWeight: FontWeight.w700,
+  color: darkBlue,
+);
+
+const orangeStandardText = TextStyle(
+  fontSize: 18,
+  color: orange,
+);
+
+const orangeBoldStandardText = TextStyle(
+  fontSize: 18,
+  fontWeight: FontWeight.w700,
+  color: orange,
+);
+
 // Header text style
 const headerText = TextStyle(
   fontSize: 24,
@@ -70,8 +93,17 @@ const orangeBoldHeaderText = TextStyle(
   color: orange,
 );
 
-const greyBoldHeaderText = TextStyle(
-  fontSize: 24,
+const greyBoldHeaderText =
+    TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: grey);
+
+const selectedCounter = TextStyle(
+  fontSize: 40,
   fontWeight: FontWeight.w700,
-  color: grey
+  color: darkBlue,
+);
+
+const unselectedCounter = TextStyle(
+  fontSize: 40,
+  fontWeight: FontWeight.w400,
+  color: grey,
 );

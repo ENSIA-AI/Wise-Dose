@@ -1,4 +1,6 @@
 
+// ignore_for_file: avoid_unnecessary_containers
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';

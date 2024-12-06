@@ -9,4 +9,4 @@ const buttonColor = LinearGradient(
 );
 
 const orange = Color.fromRGBO(255, 157, 19, 1);
-const grey = Colors.grey;
+const grey = Color.fromRGBO(33, 67, 83, 50);
