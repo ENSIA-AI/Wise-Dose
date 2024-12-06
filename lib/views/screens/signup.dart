@@ -8,14 +8,14 @@ import 'package:wise_dose/views/widgets/alternative_login.dart';
 import 'package:wise_dose/views/widgets/gradient_button.dart';
 import 'package:wise_dose/views/widgets/text_field.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Signup extends StatefulWidget {
+  const Signup({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Signup> createState() => _SignupState();
 }
 
-class _LoginState extends State<Login> {
+class _SignupState extends State<Signup> {
 
   final _formGlobalKey = GlobalKey<FormState>();
 
@@ -30,27 +30,41 @@ class _LoginState extends State<Login> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: const EdgeInsets.only(top: 20, bottom: 20),
-              child: Image.asset("assets/images/Logo.png",),
+              margin: const EdgeInsets.only(top: 20),
+              child: Image.asset("assets/images/Logo.png", height: 100,),
             ),
             Form(
               key : _formGlobalKey,
               child: Column(
                 children: [
-                  CustomTextFormField(label: "UserName", hint: "UserName", validate: (value){
+                  CustomTextFormField(label: "UserName", hint: "Enter UserName", validate: (value){
                     if(value == null || value == "a"){
                       return "aaaaa error";
                     }
                     return null;
                   }),
-                  const SizedBox(height: 30,),
-                  CustomTextFormField(label: "Password", hint: "Password", validate: (value){
+                  const SizedBox(height: 10,),
+                  CustomTextFormField(label: "Email", hint: "Enter Email", validate: (value){
                     if(value == null || value == "a"){
                       return "aaaaa error";
                     }
                     return null;
                   }),
-                  const SizedBox(height: 30,),
+                  const SizedBox(height: 10,),
+                  CustomTextFormField(label: "Password", hint: "Enter Password", validate: (value){
+                    if(value == null || value == "a"){
+                      return "aaaaa error";
+                    }
+                    return null;
+                  }),
+                  const SizedBox(height: 10,),
+                  CustomTextFormField(label: "Password Confirmation", hint: "Confirm Password", validate: (value){
+                    if(value == null || value == "a"){
+                      return "aaaaa error";
+                    }
+                    return null;
+                  }),
+                  const SizedBox(height: 10,),
                   Row(
                         children: [
                           Expanded(
@@ -72,33 +86,39 @@ class _LoginState extends State<Login> {
                             ],
                             )  
                           ),
-                          const Text("Forgot password?",  style: orangeParagraphText,)
                         ]
                       ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 10),
                   GradientButton(onPressed: (){
                     _formGlobalKey.currentState!.validate();
                   }, 
-                  text: "Login", 
+                  text: "Signup", 
                   gradient: buttonColor),
                 ],
               ),
             ),
-            const SizedBox(height: 30),
-            const AlternativeLogin(),
-            const SizedBox(height: 30),
-            const Text("Don't have an account?", style: TextStyle(
-                fontSize: 14,
-                color: darkBlue
-              ),),
             const SizedBox(height: 10),
-            GestureDetector(
-              onTap: (){},
-              child: const Text("Create account", style: TextStyle(
-                fontSize: 14,
-                color: Color.fromRGBO(116, 163, 207, 1)
-              )),
+            const AlternativeLogin(),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Already have an account?", style: TextStyle(
+                  fontSize: 14,
+                  color: darkBlue
+                ),),
+                const SizedBox(width: 20),
+                GestureDetector(
+                  onTap: (){},
+                    child: const Text("Login", style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                    color: Color.fromRGBO(116, 163, 207, 1)
+                  )),
+                )
+              ],
             )
+            
           ]
         )
         )

@@ -31,10 +31,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           borderRadius: BorderRadius.circular(12.0), // Border radius when focused
           borderSide: const BorderSide(color: lightBlue, width: 2.0),
         ),
+        contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12.0),
         hintText: widget.hint,
         hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
         labelText: widget.label,
         labelStyle: const TextStyle(color: Colors.grey, fontSize: 12),
+        errorStyle: const TextStyle(
+          fontSize: 8,
+        ),
       ),
       validator: widget.validate,
     );
