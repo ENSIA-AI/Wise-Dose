@@ -107,7 +107,7 @@ class _SignupState extends State<Signup> {
                   fontSize: 14,
                   color: darkBlue
                 ),),
-                const SizedBox(width: 20),
+                const SizedBox(width: 15),
                 GestureDetector(
                   onTap: (){},
                     child: const Text("Login", style: TextStyle(
@@ -127,3 +127,4 @@ class _SignupState extends State<Signup> {
     );
   }
 }
+

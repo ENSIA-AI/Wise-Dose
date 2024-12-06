@@ -44,10 +44,11 @@ class AlternativeLogin extends StatelessWidget {
                     ),
                   ), 
                   child: Container(
-                    width: 80,
                     child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Icon(Icons.facebook, size: 25, color: Colors.blue,),
+                      SizedBox(width: 10,),
                       Text("Facebook", style: paragraphText,)
                     ],
                   ),)
@@ -65,10 +66,11 @@ class AlternativeLogin extends StatelessWidget {
                     ),
                   ), 
                   child: Container(
-                    width: 80,
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                     Icon(Icons.facebook, size: 25, color: Colors.blue,),
+                      SizedBox(width: 10,),
                       Text("Google", style: paragraphText,)
                     ],
                   ),)
