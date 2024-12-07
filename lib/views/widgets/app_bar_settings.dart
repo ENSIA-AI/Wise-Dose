@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
 
 Widget getAppBarSettings() {
@@ -45,8 +46,14 @@ Widget getAppBarSettings() {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(
-                  Icons.arrow_back
+                GestureDetector(
+                  onTap: () {
+                
+                  },
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: darkBlue,
+                  ),
                 ),
                 Text(
                   "Settings" , 
