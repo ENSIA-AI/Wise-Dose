@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
-import 'package:wise_dose/views/widgets/onboarding_instance.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});
@@ -34,7 +34,10 @@ class _OnboardingState extends State<Onboarding> {
                 const SizedBox(height: 100,),
                 SvgPicture.asset("assets/images/onboarding1.svg",),
                 const SizedBox(height: 10,),
-              const Text("You too? You always forget to take your pills on time?", style: standardText, textAlign: TextAlign.center,),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: const Text("You too? You always forget to take your pills on time?", style: standardText, textAlign: TextAlign.center,),
+                )
             ],
           ),
           Column(
@@ -42,89 +45,86 @@ class _OnboardingState extends State<Onboarding> {
               const SizedBox(height: 93,),
               SvgPicture.asset("assets/images/onboarding2.svg",),
               const SizedBox(height: 17,),
-              const Text.rich(
-                textAlign: TextAlign.center,
-                TextSpan(
-                  text: 'No longer a problem with our app, with daily ', // First part of the text
-                  style: standardText,
-                  children: [
-                    TextSpan(
-                      text: 'reminders, notifications and history statistics!', // Second part
-                      style: lightBlueStandardText,
-                    ),
-                  ],
-                ),
-              )
+              Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: const Text.rich(
+                  textAlign: TextAlign.center,
+                  TextSpan(
+                    text: 'No longer a problem with our app, with daily ', // First part of the text
+                    style: standardText,
+                    children: [
+                      TextSpan(
+                        text: 'reminders, notifications and history statistics!', // Second part
+                        style: lightBlueStandardText,
+                      ),
+                    ],
+                  ),
+                )
+                )             
             ],
           ),
           Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 7,),              
+              const SizedBox(height: 94,),              
               SvgPicture.asset("assets/images/onboarding3.svg",),
-              const SizedBox(height: 25,),              
-              const Text.rich(
-                textAlign: TextAlign.center,
-                TextSpan(
-                  text: 'Create ', // First part of the text
-                  style: standardText,
-                  children: [
-                    TextSpan(
-                      text: 'your account ', // Second part
-                      style: lightBlueStandardText,
-                    ),
-                    TextSpan(
-                      text: 'to manage your medications from other devices!', // Second part
-                      style: standardText,
-                    ),
-                  ],
-                ),
-              )
+              const SizedBox(height: 16,), 
+              Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: const Text.rich(
+                  textAlign: TextAlign.center,
+                  TextSpan(
+                    text: 'Create ', // First part of the text
+                    style: standardText,
+                    children: [
+                      TextSpan(
+                        text: 'your account ', // Second part
+                        style: lightBlueStandardText,
+                      ),
+                      TextSpan(
+                        text: 'to manage your medications from other devices!', // Second part
+                        style: standardText,
+                      ),
+                    ],
+                  ),
+                )     
+              )         
             ],
           ),
           Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const SizedBox(height: 170,),              
+              SvgPicture.asset("assets/images/onboarding4.svg",),
+              const SizedBox(height: 24,), 
               Container(
-                height: 318,
-                child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SvgPicture.asset("assets/images/onboarding4.svg",),
-                ],
-              ),
-              ),              const Text.rich(
-                textAlign: TextAlign.center,
-                TextSpan(
-                  text: 'You want to manage your ', // First part of the text
-                  style: standardText,
-                  children: [
-                    TextSpan(
-                      text: 'whole family’s ', // Second part
-                      style: lightBlueStandardText,
-                    ),
-                    TextSpan(
-                      text: 'medications?', // Second part
-                      style: standardText,
-                    ),
-                  ],
-                ),
-              )
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: const Text.rich(
+                  textAlign: TextAlign.center,
+                  TextSpan(
+                    text: 'You want to manage your ', // First part of the text
+                    style: standardText,
+                    children: [
+                      TextSpan(
+                        text: 'whole family’s ', // Second part
+                        style: lightBlueStandardText,
+                      ),
+                      TextSpan(
+                        text: 'medications?', // Second part
+                        style: standardText,
+                      ),
+                    ],
+                  ),
+                )
+              )               
             ],
           ),
           Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const SizedBox(height: 95,),              
+              SvgPicture.asset("assets/images/onboarding5.svg",),
+              const SizedBox(height: 14,),
               Container(
-                height: 350,
-                child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SvgPicture.asset("assets/images/onboarding5.svg",),
-                ],
-              ),
-              ),              
-              const Text.rich(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: const Text.rich(
                 textAlign: TextAlign.center,
                 TextSpan(
                   text: 'Manage multiple accounts with our ', // First part of the text
@@ -137,29 +137,37 @@ class _OnboardingState extends State<Onboarding> {
                   ],
                 ),
               )
-            ],
+              )                         
+             ],
           ),
         ],
       ),
       ),
       bottomSheet: Container(
-        height: 150,
+        color: const Color.fromRGBO(250, 250, 250, 1),
+        height: 200,
         child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                TextButton(onPressed: (){
-                  pageController.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
-                }, child: const Text("Next")),
                 SmoothPageIndicator(
                   controller: pageController, 
                   count: 5,
+                  effect: const WormEffect(
+                    dotColor: darkBlue,
+                    activeDotColor: lightBlue,
+                    dotWidth: 10,
+                    dotHeight: 10,
+                    spacing: 5
+                  ),
                   /* onDotClicked: (index) => pageController.animateToPage(
                     index,
                     duration: const Duration(milliseconds: 500),
                     curve: Curves.easeIn
                   ), */
-                )
+                ),
+/*                 TextButton(onPressed: (){
+                  pageController.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+                }, child: const Text("Next")),
+ */
               ],
             ),
       ),
