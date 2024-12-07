@@ -95,7 +95,15 @@ const orangeHeaderText = TextStyle(
 const orangeBoldHeaderText = TextStyle(
   fontSize: 24,
   fontWeight: FontWeight.w700,
+  color: orange
+);
+
+const orangeBoldHeaderTextUnderlined = TextStyle(
+  fontSize: 24,
+  fontWeight: FontWeight.w700,
   color: orange,
+  decoration: TextDecoration.underline,
+  decorationColor: orange
 );
 
 const greyBoldHeaderText =

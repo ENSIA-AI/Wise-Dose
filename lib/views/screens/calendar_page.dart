@@ -1,9 +1,10 @@
+// ignore_for_file: depend_on_referenced_packages, library_private_types_in_public_api, prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:wise_dose/views/widgets/app_bar.dart';
-import 'package:wise_dose/views/widgets/bottom_bar.dart';
 // import 'package:lucide_icons/lucide_icons.dart';
 
 class MedicationCalendarPage extends StatefulWidget {
@@ -28,7 +29,7 @@ class _MedicationCalendarPageState extends State<MedicationCalendarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      bottomNavigationBar: getBottomBarWidget(context),
+      //bottomNavigationBar: Bottom_Nav_Bar(),
       // appBar: AppBar(
       //   leadingWidth: 100,
       //   leading: Padding(
@@ -47,124 +48,126 @@ class _MedicationCalendarPageState extends State<MedicationCalendarPage> {
       //   backgroundColor: Colors.white,
       //   foregroundColor: Colors.black,
       // ),
-      body: Column(
-        children: [
-           getAppBar(),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                    "Calendar",
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xff214353)),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            getAppBar(),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      "Calendar",
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff214353)),
+                    ),
+                  ),
+                 Column(
+          children: [
+            Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(
+            color: Colors.white,
+            width: 2,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 8,
+              offset: Offset(4, 4),
+            ),
+          ],
+        ),
+        child: TableCalendar(
+          locale: "en_US",
+          headerStyle: HeaderStyle(
+            formatButtonVisible: false,
+            titleCentered: true,
+          ),
+          availableGestures: AvailableGestures.all,
+          selectedDayPredicate: (day) => isSameDay(day, today),
+          focusedDay: today,
+          firstDay: DateTime.utc(2010, 10, 16),
+          lastDay: DateTime.utc(2030, 10, 16),
+          onDaySelected: _onDaySelected,
+          calendarBuilders: CalendarBuilders(
+            headerTitleBuilder: (context, day) {
+              String formattedDate = DateFormat('d MMMM, yyyy').format(today);
+              return Center(
+                child: Text(
+                  formattedDate,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-               Column(
-  children: [
-    Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
-        border: Border.all(
-          color: Colors.white,
-          width: 2,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 8,
-            offset: Offset(4, 4),
+              );
+            },
           ),
-        ],
-      ),
-      child: TableCalendar(
-        locale: "en_US",
-        headerStyle: HeaderStyle(
-          formatButtonVisible: false,
-          titleCentered: true,
-        ),
-        availableGestures: AvailableGestures.all,
-        selectedDayPredicate: (day) => isSameDay(day, today),
-        focusedDay: today,
-        firstDay: DateTime.utc(2010, 10, 16),
-        lastDay: DateTime.utc(2030, 10, 16),
-        onDaySelected: _onDaySelected,
-        calendarBuilders: CalendarBuilders(
-          headerTitleBuilder: (context, day) {
-            String formattedDate = DateFormat('d MMMM, yyyy').format(today);
-            return Center(
-              child: Text(
-                formattedDate,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            );
-          },
-        ),
-        calendarStyle: CalendarStyle(
-          selectedDecoration: BoxDecoration(
-            color: Color(0xff214353),
-            shape: BoxShape.circle,
-          ),
-          todayDecoration: BoxDecoration(
-            color: Color(0xff214353).withOpacity(0.3),
-            shape: BoxShape.circle,
-          ),
-          selectedTextStyle: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    ),
-    Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-      child: Row(
-        children: [
-          Text(
-            DateFormat('d MMM yyyy').format(today),
-            style: TextStyle(
-              fontSize: 16.0,
+          calendarStyle: CalendarStyle(
+            selectedDecoration: BoxDecoration(
+              color: Color(0xff214353),
+              shape: BoxShape.circle,
+            ),
+            todayDecoration: BoxDecoration(
+              color: Color(0xff214353).withOpacity(0.3),
+              shape: BoxShape.circle,
+            ),
+            selectedTextStyle: TextStyle(
+              color: Colors.white,
               fontWeight: FontWeight.bold,
-              color: Color(0xff214353),
             ),
           ),
-          SizedBox(width: 8.0),
-          Expanded(
-            child: Divider(
-              color: Color(0xff214353),
-              thickness: 1.5,
-            ),
-          ),
-        ],
-      ),
-    ),
-    if (showCard)
-      _buildMedicationInfo()
-    else
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: SvgPicture.asset(
-          'icons/No_medication.svg', // Path to your SVG file
-          height: 200, // Set appropriate size
         ),
-      ),
-  ],
-)
-
-              ],
             ),
+            Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+        child: Row(
+          children: [
+            Text(
+              DateFormat('d MMM yyyy').format(today),
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+                color: Color(0xff214353),
+              ),
+            ),
+            SizedBox(width: 8.0),
+            Expanded(
+              child: Divider(
+                color: Color(0xff214353),
+                thickness: 1.5,
+              ),
+            ),
+          ],
+        ),
+            ),
+            if (showCard)
+        _buildMedicationInfo()
+            else
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: SvgPicture.asset(
+            'icons/No_medication.svg', // Path to your SVG file
+            height: 200, // Set appropriate size
           ),
-        ],
+        ),
+          ],
+        )
+        
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
