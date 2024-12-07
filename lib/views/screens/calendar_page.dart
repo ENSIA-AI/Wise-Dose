@@ -4,6 +4,9 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:wise_dose/views/widgets/app_bar.dart';
 import 'package:wise_dose/views/widgets/bottom_bar.dart';
+import 'package:wise_dose/views/screens/medication-info.dart';
+import 'package:wise_dose/views/themes/style_simple/colors.dart';
+import 'package:wise_dose/views/themes/style_simple/styles.dart';
 // import 'package:lucide_icons/lucide_icons.dart';
 
 class MedicationCalendarPage extends StatefulWidget {
@@ -29,142 +32,135 @@ class _MedicationCalendarPageState extends State<MedicationCalendarPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: getBottomBarWidget(context),
-      // appBar: AppBar(
-      //   leadingWidth: 100,
-      //   leading: Padding(
-      //     padding: EdgeInsets.all(8.0),
-      //     child: Image.asset('assets/images/real_logo.jpg'),
-      //   ),
-      //   actions: [
-      //     IconButton(
-      //       icon: Icon(LucideIcons.bell),
-      //       onPressed: () {
-      //         // Handle bell icon press
-      //       },
-      //     ),
-      //   ],
-      //   elevation: 4,
-      //   backgroundColor: Colors.white,
-      //   foregroundColor: Colors.black,
-      // ),
-      body: Column(
-        children: [
-           getAppBar(),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                    "Calendar",
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xff214353)),
-                  ),
-                ),
-               Column(
-  children: [
-    Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
-        border: Border.all(
-          color: Colors.white,
-          width: 2,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 8,
-            offset: Offset(4, 4),
-          ),
-        ],
-      ),
-      child: TableCalendar(
-        locale: "en_US",
-        headerStyle: HeaderStyle(
-          formatButtonVisible: false,
-          titleCentered: true,
-        ),
-        availableGestures: AvailableGestures.all,
-        selectedDayPredicate: (day) => isSameDay(day, today),
-        focusedDay: today,
-        firstDay: DateTime.utc(2010, 10, 16),
-        lastDay: DateTime.utc(2030, 10, 16),
-        onDaySelected: _onDaySelected,
-        calendarBuilders: CalendarBuilders(
-          headerTitleBuilder: (context, day) {
-            String formattedDate = DateFormat('d MMMM, yyyy').format(today);
-            return Center(
-              child: Text(
-                formattedDate,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            );
-          },
-        ),
-        calendarStyle: CalendarStyle(
-          selectedDecoration: BoxDecoration(
-            color: Color(0xff214353),
-            shape: BoxShape.circle,
-          ),
-          todayDecoration: BoxDecoration(
-            color: Color(0xff214353).withOpacity(0.3),
-            shape: BoxShape.circle,
-          ),
-          selectedTextStyle: TextStyle(
+       floatingActionButton: GestureDetector(
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const MedicationInfo()));
+          setState(() {
+            
+          });
+        },
+        child: Container(
+          width: 50,
+          height: 50,
+          decoration:
+              const BoxDecoration(shape: BoxShape.circle, gradient: buttonColor),
+          child: const Icon(
+            Icons.add,
             color: Colors.white,
-            fontWeight: FontWeight.bold,
           ),
         ),
       ),
-    ),
-    Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-      child: Row(
-        children: [
-          Text(
-            DateFormat('d MMM yyyy').format(today),
-            style: TextStyle(
-              fontSize: 16.0,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+             getAppBar(),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Text(
+                      "Calendar",
+                      style: boldHeaderText,
+                    ),
+                  ),
+                 Column(
+          children: [
+            Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(
+            color: Colors.white,
+            width: 2,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 8,
+              offset: const Offset(4, 4),
+            ),
+          ],
+        ),
+        child: TableCalendar(
+          locale: "en_US",
+          headerStyle: const HeaderStyle(
+            formatButtonVisible: false,
+            titleCentered: true,
+          ),
+          availableGestures: AvailableGestures.all,
+          selectedDayPredicate: (day) => isSameDay(day, today),
+          focusedDay: today,
+          firstDay: DateTime.utc(2010, 10, 16),
+          lastDay: DateTime.utc(2030, 10, 16),
+          onDaySelected: _onDaySelected,
+          calendarBuilders: CalendarBuilders(
+            headerTitleBuilder: (context, day) {
+              String formattedDate = DateFormat('d MMMM, yyyy').format(today);
+              return Center(
+                child: Text(
+                  formattedDate,
+                  style: boldStandardText,
+                ),
+              );
+            },
+          ),
+          calendarStyle: CalendarStyle(
+            selectedDecoration: const BoxDecoration(
+              color: Color(0xff214353),
+              shape: BoxShape.circle,
+            ),
+            todayDecoration: BoxDecoration(
+              color: const Color(0xff214353).withOpacity(0.3),
+              shape: BoxShape.circle,
+            ),
+            selectedTextStyle: const TextStyle(
+              color: Colors.white,
               fontWeight: FontWeight.bold,
-              color: Color(0xff214353),
             ),
           ),
-          SizedBox(width: 8.0),
-          Expanded(
-            child: Divider(
-              color: Color(0xff214353),
-              thickness: 1.5,
-            ),
-          ),
-        ],
-      ),
-    ),
-    if (showCard)
-      _buildMedicationInfo()
-    else
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: SvgPicture.asset(
-          'icons/No_medication.svg', // Path to your SVG file
-          height: 200, // Set appropriate size
         ),
-      ),
-  ],
-)
-
-              ],
             ),
+            Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+        child: Row(
+          children: [
+            Text(
+              DateFormat('d MMM yyyy').format(today),
+              style:boldTitleText,
+            ),
+            const SizedBox(width: 8.0),
+            const Expanded(
+              child: Divider(
+                color: Color(0xff214353),
+                thickness: 1.5,
+              ),
+            ),
+          ],
+        ),
+            ),
+            if (showCard)
+        _buildMedicationInfo()
+            else
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: SvgPicture.asset(
+            'icons/No_medication.svg', // Path to your SVG file
+            height: 200, // Set appropriate size
           ),
-        ],
+        ),
+          ],
+        )
+        
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -231,7 +227,7 @@ class _MedicationCalendarPageState extends State<MedicationCalendarPage> {
               color: Colors.black.withOpacity(0.2), // Shadow color
               spreadRadius: 2, // How much the shadow spreads
               blurRadius: 8, // Softness of the shadow
-              offset: Offset(4, 4), // Shadow position
+              offset: const Offset(4, 4), // Shadow position
             ),
           ],
         ),
@@ -242,7 +238,7 @@ class _MedicationCalendarPageState extends State<MedicationCalendarPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
+                const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
@@ -255,11 +251,7 @@ class _MedicationCalendarPageState extends State<MedicationCalendarPage> {
                         SizedBox(width: 8.0), // Space between icon and text
                         Text(
                           'For Me: Paracetamol',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff214353),
-                          ),
+                          style: boldStandardText,
                         ),
                       ],
                     ),
@@ -273,10 +265,7 @@ class _MedicationCalendarPageState extends State<MedicationCalendarPage> {
                         SizedBox(width: 8.0), // Space between icon and text
                         Text(
                           '13:30',
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color:Color(0xff214353),
-                          ),
+                          style: titleText,
                         ),
                       ],
                     ),
