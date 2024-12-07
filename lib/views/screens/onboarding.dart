@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
@@ -21,7 +22,6 @@ class _OnboardingState extends State<Onboarding> {
 
   @override
   void initState() {
-    // TODO: implement initState
     inFirstPage = true;
     inLastPage = false;
     super.initState();
@@ -214,10 +214,10 @@ class _OnboardingState extends State<Onboarding> {
                     children: [
                       Column(
                         children: [
-                        GradientButton(onPressed: (){
+                        GradientButton(onPressed: () async{
                         }, text: "Create account", gradient: buttonColor, width: 200,),
                         const SizedBox(height: 10,),
-                        TransparentButton(onPressed: (){
+                        TransparentButton(onPressed: ()async {
                         }, 
                         content: "Stay offline", width: 200
                       ),

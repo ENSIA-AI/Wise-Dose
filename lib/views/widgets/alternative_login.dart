@@ -69,12 +69,12 @@ class AlternativeLogin extends StatelessWidget {
                     ),
                   ), 
                   child: Container(
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.facebook, size: 25, color: Colors.blue,),
-                      SizedBox(width: 10,),
-                      Text("Google", style: paragraphText,)
+                      SvgPicture.asset("assets/icons/google.svg", height: 10, width: 10,),
+                      const SizedBox(width: 10,),
+                      const Text("Google", style: paragraphText,)
                     ],
                   ),)
                 ),
