@@ -2,6 +2,7 @@
 // ignore_for_file: avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
 
@@ -71,7 +72,7 @@ class AlternativeLogin extends StatelessWidget {
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                     Icon(Icons.facebook, size: 25, color: Colors.blue,),
+                      Icon(Icons.facebook, size: 25, color: Colors.blue,),
                       SizedBox(width: 10,),
                       Text("Google", style: paragraphText,)
                     ],

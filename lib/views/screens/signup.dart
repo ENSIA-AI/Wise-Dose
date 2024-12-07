@@ -7,6 +7,7 @@ import 'package:wise_dose/views/themes/style_simple/styles.dart';
 import 'package:wise_dose/views/widgets/alternative_login.dart';
 import 'package:wise_dose/views/widgets/gradient_button.dart';
 import 'package:wise_dose/views/widgets/text_field.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -31,7 +32,7 @@ class _SignupState extends State<Signup> {
           children: [
             Container(
               margin: const EdgeInsets.only(top: 20),
-              child: Image.asset("assets/images/Logo.png", height: 100,),
+              child: Image.asset("assets/images/Logo.png"),
             ),
             Form(
               key : _formGlobalKey,
