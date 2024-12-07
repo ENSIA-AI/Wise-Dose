@@ -59,6 +59,11 @@ const boldStandardText = TextStyle(
   color: darkBlue,
 );
 
+const lightBlueStandardText = TextStyle(
+  fontSize: 18,
+  color: lightBlue,
+);
+
 const orangeStandardText = TextStyle(
   fontSize: 18,
   color: orange,
