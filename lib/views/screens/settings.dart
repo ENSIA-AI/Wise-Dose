@@ -56,7 +56,6 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      bottomNavigationBar: getBottomBarWidget(context),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         getAppBarSettings(),
         SizedBox(
