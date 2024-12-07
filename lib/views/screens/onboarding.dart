@@ -4,6 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
+import 'package:wise_dose/views/widgets/gradient_button.dart';
+import 'package:wise_dose/views/widgets/transparent_button.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});
@@ -14,7 +16,16 @@ class Onboarding extends StatefulWidget {
 
 class _OnboardingState extends State<Onboarding> {
   final pageController = PageController();
+  late bool inFirstPage;
+  late bool inLastPage;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    inFirstPage = true;
+    inLastPage = false;
+    super.initState();
+  }
 
   @override void dispose() {
     pageController.dispose();
@@ -28,6 +39,12 @@ class _OnboardingState extends State<Onboarding> {
         padding: const EdgeInsets.only(bottom: 150),
         child: PageView(
         controller: pageController,
+        onPageChanged: (value) {
+            setState(() {
+              inFirstPage = (value == 0);
+              inLastPage = (value == 4);
+            });
+        },
         children: [
           Column(
             children: [
@@ -158,16 +175,57 @@ class _OnboardingState extends State<Onboarding> {
                     dotHeight: 10,
                     spacing: 5
                   ),
-                  /* onDotClicked: (index) => pageController.animateToPage(
-                    index,
-                    duration: const Duration(milliseconds: 500),
+                  onDotClicked: (index) => pageController.animateToPage(
+                    index, 
+                    duration: const Duration(milliseconds: 200),
                     curve: Curves.easeIn
-                  ), */
+                  ),
                 ),
-/*                 TextButton(onPressed: (){
-                  pageController.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
-                }, child: const Text("Next")),
- */
+                const SizedBox(height: 50,),
+                if(!inFirstPage && !inLastPage)  Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TransparentButton(onPressed: (){
+                          pageController.previousPage(duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
+                        }, 
+                        content: "Back", width: 100
+                      ),
+                    GradientButton(onPressed: (){
+                      pageController.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
+                    }, text: "Next", gradient: buttonColor, width: 100,)
+                ],)
+              ),  
+              if(inFirstPage) Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                        GradientButton(onPressed: (){
+                          pageController.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
+                        }, text: "Next", gradient: buttonColor, width: 100,)
+                    ],)
+                ),
+              if(inLastPage) Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Column(
+                        children: [
+                        GradientButton(onPressed: (){
+                        }, text: "Create account", gradient: buttonColor, width: 200,),
+                        const SizedBox(height: 10,),
+                        TransparentButton(onPressed: (){
+                        }, 
+                        content: "Stay offline", width: 200
+                      ),
+                        ],
+                      )
+                        
+                    ],)
+                )
               ],
             ),
       ),
