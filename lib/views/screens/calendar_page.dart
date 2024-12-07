@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, library_private_types_in_public_api, prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -31,11 +33,11 @@ class _MedicationCalendarPageState extends State<MedicationCalendarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      bottomNavigationBar: getBottomBarWidget(context),
+      bottomNavigationBar: Bottom_Nav_Bar(),
        floatingActionButton: GestureDetector(
         onTap: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const MedicationInfo()));
+              MaterialPageRoute(builder: (context) => MedicationInfo()));
           setState(() {
             
           });
@@ -44,13 +46,14 @@ class _MedicationCalendarPageState extends State<MedicationCalendarPage> {
           width: 50,
           height: 50,
           decoration:
-              const BoxDecoration(shape: BoxShape.circle, gradient: buttonColor),
-          child: const Icon(
+              BoxDecoration(shape: BoxShape.circle, gradient: buttonColor),
+          child: Icon(
             Icons.add,
             color: Colors.white,
           ),
         ),
       ),
+      
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -60,8 +63,8 @@ class _MedicationCalendarPageState extends State<MedicationCalendarPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.all(20.0),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
                     child: Text(
                       "Calendar",
                       style: boldHeaderText,
@@ -82,13 +85,13 @@ class _MedicationCalendarPageState extends State<MedicationCalendarPage> {
               color: Colors.black.withOpacity(0.2),
               spreadRadius: 2,
               blurRadius: 8,
-              offset: const Offset(4, 4),
+              offset: Offset(4, 4),
             ),
           ],
         ),
         child: TableCalendar(
           locale: "en_US",
-          headerStyle: const HeaderStyle(
+          headerStyle: HeaderStyle(
             formatButtonVisible: false,
             titleCentered: true,
           ),
@@ -104,21 +107,24 @@ class _MedicationCalendarPageState extends State<MedicationCalendarPage> {
               return Center(
                 child: Text(
                   formattedDate,
-                  style: boldStandardText,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               );
             },
           ),
           calendarStyle: CalendarStyle(
-            selectedDecoration: const BoxDecoration(
+            selectedDecoration: BoxDecoration(
               color: Color(0xff214353),
               shape: BoxShape.circle,
             ),
             todayDecoration: BoxDecoration(
-              color: const Color(0xff214353).withOpacity(0.3),
+              color: Color(0xff214353).withOpacity(0.3),
               shape: BoxShape.circle,
             ),
-            selectedTextStyle: const TextStyle(
+            selectedTextStyle: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),
@@ -131,10 +137,14 @@ class _MedicationCalendarPageState extends State<MedicationCalendarPage> {
           children: [
             Text(
               DateFormat('d MMM yyyy').format(today),
-              style:boldTitleText,
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+                color: Color(0xff214353),
+              ),
             ),
-            const SizedBox(width: 8.0),
-            const Expanded(
+            SizedBox(width: 8.0),
+            Expanded(
               child: Divider(
                 color: Color(0xff214353),
                 thickness: 1.5,

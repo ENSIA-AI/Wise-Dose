@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
 import 'package:wise_dose/views/widgets/app_bar_arrow_back.dart';
-import 'package:wise_dose/views/widgets/bottom_bar.dart';
 import 'package:wise_dose/views/widgets/gradient_button.dart';
 import 'package:wise_dose/views/widgets/number_picker.dart';
 import 'package:wise_dose/views/widgets/switch_button.dart';
@@ -24,11 +23,11 @@ class _MedicationInfoState extends State<MedicationInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      bottomNavigationBar: getBottomBarWidget(context),
+      //bottomNavigationBar: Bottom_Nav_Bar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            getAppBarArrowBack(),
+            getAppBarArrowBack(context),
             NumberPage(),
             Form(
                 key: _formGlobalKey,

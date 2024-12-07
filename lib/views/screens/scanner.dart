@@ -5,7 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
 import 'package:wise_dose/views/widgets/app_bar.dart';
-import 'package:wise_dose/views/widgets/bottom_bar.dart';
 import 'package:wise_dose/views/widgets/gradient_button.dart';
 
 class Scanner extends StatefulWidget {
@@ -19,7 +18,7 @@ class _ScannerState extends State<Scanner> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: getBottomBarWidget(context),
+      //bottomNavigationBar: Bottom_Nav_Bar(),
       backgroundColor: Colors.white,
       body: Column(
         children: [

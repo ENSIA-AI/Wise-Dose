@@ -1,9 +1,10 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:wise_dose/views/screens/medication-info.dart';
+import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
 import 'package:wise_dose/views/widgets/app_bar.dart';
-import 'package:wise_dose/views/widgets/bottom_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class History extends StatefulWidget {
@@ -14,11 +15,32 @@ class History extends StatefulWidget {
 }
 
 class _HistoryState extends State<History> {
+  bool completed_selected = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      bottomNavigationBar: getBottomBarWidget(context),
+      //bottomNavigationBar: Bottom_Nav_Bar(),
+      floatingActionButton: GestureDetector(
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => MedicationInfo()));
+          setState(() {
+            
+          });
+        },
+        child: Container(
+          width: 50,
+          height: 50,
+          decoration:
+              BoxDecoration(shape: BoxShape.circle, gradient: buttonColor),
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+        ),
+      ),
       body: Column(
         children: [
           // Fixed AppBar
@@ -31,18 +53,36 @@ class _HistoryState extends State<History> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Completed',
-                  style: orangeBoldHeaderText,
+                GestureDetector(
+                  onTap: () {
+                    completed_selected = !completed_selected;
+                    setState(() {});
+                  },
+                  child: Text(
+                    'Completed',
+                    style: completed_selected
+                        ? orangeBoldHeaderTextUnderlined
+                        : greyBoldHeaderText,
+                  ),
                 ),
-                Text(
-                  'On going',
-                  style: greyBoldHeaderText,
+                GestureDetector(
+                  onTap: () {
+                    completed_selected = !completed_selected;
+                    setState(() {});
+                  },
+                  child: Text(
+                    'On going',
+                    style: completed_selected
+                        ? greyBoldHeaderText
+                        : orangeBoldHeaderTextUnderlined,
+                  ),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           // Scrollable Content
           Expanded(
             child: SingleChildScrollView(
@@ -68,7 +108,7 @@ class _HistoryState extends State<History> {
 
   Widget ReminderContanier() {
     return Container(
-      height: 140,
+      height: 145,
       margin: EdgeInsets.symmetric(horizontal: 15),
       padding: EdgeInsets.all(15),
       decoration: BoxDecoration(

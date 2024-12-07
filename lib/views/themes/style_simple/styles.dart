@@ -59,6 +59,11 @@ const boldStandardText = TextStyle(
   color: darkBlue,
 );
 
+const lightBlueStandardText = TextStyle(
+  fontSize: 18,
+  color: lightBlue,
+);
+
 const orangeStandardText = TextStyle(
   fontSize: 18,
   color: orange,
@@ -90,7 +95,15 @@ const orangeHeaderText = TextStyle(
 const orangeBoldHeaderText = TextStyle(
   fontSize: 24,
   fontWeight: FontWeight.w700,
+  color: orange
+);
+
+const orangeBoldHeaderTextUnderlined = TextStyle(
+  fontSize: 24,
+  fontWeight: FontWeight.w700,
   color: orange,
+  decoration: TextDecoration.underline,
+  decorationColor: orange
 );
 
 const greyBoldHeaderText =
