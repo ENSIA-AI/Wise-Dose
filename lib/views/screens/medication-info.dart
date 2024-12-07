@@ -18,174 +18,180 @@ class MedicationInfo extends StatefulWidget {
 
 class _MedicationInfoState extends State<MedicationInfo> {
   final _formGlobalKey = GlobalKey<FormState>();
+  final items  = ["Daily", "2 to 3 times a week", "Weekly"];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       //bottomNavigationBar: Bottom_Nav_Bar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            getAppBarArrowBack(context),
-            NumberPage(),
-            Form(
-                key: _formGlobalKey,
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Medication Name', // The label above the text field
-                        style: paragraphText,
-                      ),
-                      SizedBox(
-                        height: 4,
-                      ),
-                      // medication name
-                      Container(
-                        child: CustomTextFormField(
-                          label: "",
-                          hint: "Enter Name",
-                          validate: (value) {
-                            if (value == null || value == "a") {
-                              return "aaaaa error";
-                            }
-                            return null;
-                          }
+      body: Column(
+        children: [
+          getAppBarArrowBack(context),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  NumberPage(),
+                  Form(
+                      key: _formGlobalKey,
+                      child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 4,
+                            ),
+                            // medication name
+                            Container(
+                              child: CustomTextFormField(
+                                label: "Medication Name",
+                                hint: "Enter Medication Name",
+                                validate: (value) {
+                                  if (value == null || value == "a") {
+                                    return "aaaaa error";
+                                  }
+                                  return null;
+                                }
+                              ),
+                            ),
+                            SizedBox(height: 15,),
+                            Row(
+                              children: [
+                                Text(
+                                  "From :",
+                                  style: standardText,
+                                ),
+                                SizedBox(width: 8,),
+                                Container(
+                                  width: 120,
+                                  height: 50,
+                                  child: CustomTextFormField(
+                                    label: 'Start date', 
+                                    hint: 'dd/mm/yyyy', 
+                                    validate: (value) {
+                                      if (value == null || value == "a") {
+                                        return "aaaaa error";
+                                      }
+                                      return null;
+                                    }
+                                  ),
+                                ),
+                                SizedBox(width: 8,),
+                                Text(
+                                  "To : ",
+                                  style: standardText,
+                                ),
+                                SizedBox(width: 8,),
+                                Container(
+                                  width: 120,
+                                  height: 50,
+                                  child: CustomTextFormField(
+                                    label: 'End date', 
+                                    hint: 'dd/mm/yyyy', 
+                                    validate: (value) {
+                                      if (value == null || value == "a") {
+                                        return "aaaaa error";
+                                      }
+                                      return null;
+                                    }
+                                  ),
+                                ),
+                              ], 
+                            ),
+                            SizedBox(height: 15,),
+                            // frequency select element
+                            Row(
+                              children: [
+                                Text(
+                                  "Frequency :",
+                                  style: standardText,
+                                ),
+                                SizedBox(width: 12,),
+                                Container(
+                                  width: 120,
+                                  height: 50,
+                                  child: CustomTextFormField(
+                                    label: '', 
+                                    hint: 'Daily', 
+                                    validate: (value) {
+                                      if (value == null || value == "a") {
+                                        return "aaaaa error";
+                                      }
+                                      return null;
+                                    }
+                                  ),
+                                ),
+                              ], 
+                            ),
+                            SizedBox(height: 5,),
+                            Text(
+                              'Details', // The label above the text field
+                              style: paragraphText,
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Container(
+                              //height: 100,
+                              child: TextFormField(
+                                keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                cursorColor: lightBlue,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.0), // Border radius when focused
+                                    borderSide: const BorderSide(color: lightBlue, width: 2.0),
+                                  ),
+              
+                                  contentPadding: EdgeInsets.only(bottom: 60, left: 15), 
+                                  hintText: "Enter Details",
+                                  hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
+                                  labelText: "",
+                                  labelStyle: const TextStyle(color: Colors.grey, fontSize: 12),
+                                  errorStyle: const TextStyle(
+                                    fontSize: 8,
+                                  ),
+                                ),
+                                validator: (value) {
+                                  return null;
+                                },
+                              ),
+                            ),
+                            SizedBox(height: 15,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  'Add "Yes, I took my medications" button?',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: darkBlue
+                                  )
+                                ),
+                                SizedBox(width: 4,),
+                                ToggleSwitch()
+                              ],
+                            ),
+                            SizedBox(height: 5,),
+                            GradientButton(
+                              onPressed: () {}, 
+                              text: "Add Medication",
+                              gradient: buttonColor
+                            ),
+                            SizedBox(height: 20,)
+                          ],
                         ),
-                      ),
-                      SizedBox(height: 15,),
-                      Row(
-                        children: [
-                          Text(
-                            "From :",
-                            style: standardText,
-                          ),
-                          SizedBox(width: 12,),
-                          Container(
-                            width: 120,
-                            height: 50,
-                            child: CustomTextFormField(
-                              label: '', 
-                              hint: 'dd/mm/yyyy', 
-                              validate: (value) {
-                                if (value == null || value == "a") {
-                                  return "aaaaa error";
-                                }
-                                return null;
-                              }
-                            ),
-                          ),
-                          SizedBox(width: 12,),
-                          Text(
-                            "To : ",
-                            style: standardText,
-                          ),
-                          SizedBox(width: 8,),
-                          Container(
-                            width: 120,
-                            height: 50,
-                            child: CustomTextFormField(
-                              label: '', 
-                              hint: 'dd/mm/yyyy', 
-                              validate: (value) {
-                                if (value == null || value == "a") {
-                                  return "aaaaa error";
-                                }
-                                return null;
-                              }
-                            ),
-                          ),
-                        ], 
-                      ),
-                      SizedBox(height: 15,),
-                      // frequency select element
-                      Row(
-                        children: [
-                          Text(
-                            "Frequency :",
-                            style: standardText,
-                          ),
-                          SizedBox(width: 12,),
-                          Container(
-                            width: 120,
-                            height: 50,
-                            child: CustomTextFormField(
-                              label: '', 
-                              hint: 'Daily', 
-                              validate: (value) {
-                                if (value == null || value == "a") {
-                                  return "aaaaa error";
-                                }
-                                return null;
-                              }
-                            ),
-                          ),
-                        ], 
-                      ),
-                      SizedBox(height: 5,),
-                      Text(
-                        'Details', // The label above the text field
-                        style: paragraphText,
-                      ),
-                      SizedBox(
-                        height: 4,
-                      ),
-                      Container(
-                        //height: 100,
-                        child: TextFormField(
-                          keyboardType: TextInputType.multiline,
-                          maxLines: null,
-                          cursorColor: Colors.lightBlue,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12.0), // Border radius when focused
-                              borderSide: const BorderSide(color: Colors.lightBlue, width: 2.0),
-                            ),
-
-                            contentPadding: EdgeInsets.only(bottom: 60, left: 15), 
-                            hintText: "Enter Details",
-                            hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
-                            labelText: "",
-                            labelStyle: const TextStyle(color: Colors.grey, fontSize: 12),
-                            errorStyle: const TextStyle(
-                              fontSize: 8,
-                            ),
-                          ),
-                          validator: (value) {
-                            return null;
-                          },
-                        ),
-                      ),
-                      SizedBox(height: 15,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            'Add "Yes, I took my medications" button?',
-                            style:titleText
-                          ),
-                          SizedBox(width: 4,),
-                          ToggleSwitch()
-                        ],
-                      ),
-                      SizedBox(height: 5,),
-                      GradientButton(
-                        onPressed: () {}, 
-                        text: "Add Medication",
-                        gradient: buttonColor
-                      ),
-                      SizedBox(height: 20,)
-                    ],
-                  ),
-                ))
-          ],
-        ),
+                      ))
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
