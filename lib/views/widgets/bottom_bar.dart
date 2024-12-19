@@ -14,7 +14,7 @@ class Bottom_Nav_Bar extends StatefulWidget {
 }
 
 class _Bottom_Nav_BarState extends State<Bottom_Nav_Bar> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
 
   final List<Widget> _pages = [
     Scanner(),
