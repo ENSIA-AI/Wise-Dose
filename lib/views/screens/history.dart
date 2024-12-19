@@ -47,11 +47,10 @@ class _HistoryState extends State<History> {
           getAppBar(),
           SizedBox(height: 36),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 60),
             height: 36,
             color: Colors.white,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 GestureDetector(
                   onTap: () {
@@ -108,7 +107,6 @@ class _HistoryState extends State<History> {
 
   Widget ReminderContanier() {
     return Container(
-      height: 145,
       margin: EdgeInsets.symmetric(horizontal: 15),
       padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
@@ -142,14 +140,14 @@ class _HistoryState extends State<History> {
               ),
               Text(
                 'For Me:',
-                style: headerText,
+                style: standardText,
               ),
               SizedBox(
                 width: 4,
               ),
               Text(
                 'Paracetamol',
-                style: boldHeaderText,
+                style: boldStandardText,
               ),
             ],
           ),

@@ -58,6 +58,7 @@ class _MedicationInfoState extends State<MedicationInfo> {
                             ),
                             SizedBox(height: 15,),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Text(
                                   "From :",
@@ -65,7 +66,7 @@ class _MedicationInfoState extends State<MedicationInfo> {
                                 ),
                                 SizedBox(width: 8,),
                                 Container(
-                                  width: 120,
+                                  width: MediaQuery.of(context).size.width / 3.5,
                                   height: 50,
                                   child: CustomTextFormField(
                                     label: 'Start date', 
@@ -85,7 +86,7 @@ class _MedicationInfoState extends State<MedicationInfo> {
                                 ),
                                 SizedBox(width: 8,),
                                 Container(
-                                  width: 120,
+                                  width: MediaQuery.of(context).size.width / 3.5,
                                   height: 50,
                                   child: CustomTextFormField(
                                     label: 'End date', 
