@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wise_dose/blocs/medication_bloc/medication_bloc.dart';
+import 'package:wise_dose/blocs/medication_bloc/medication_state.dart';
 import 'package:wise_dose/views/screens/medication-info.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
@@ -81,18 +83,35 @@ class History extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: List.generate(
-                    4,
-                    (index) => const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: ReminderContainer(name: 'Paracetamol', startDate: '01 Oct, 2024', 
-                        endDate: '01 Nov, 2024', frequency: 'Two',),
-                    ),
+              child: Expanded(
+                  child: BlocBuilder<MedicationBloc, MedicationState>(
+                    builder: (context, medState) {
+                      return FutureBuilder<List<Map<dynamic, dynamic>>>(
+                        future: medState.myList,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return const Center(child: CircularProgressIndicator());
+                          } else if (snapshot.hasError) {
+                            return Center(child: Text('Error: ${snapshot.error}'));
+                          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                            return const Center(child: Text('No medications found'));
+                          } else {
+                            final medications = snapshot.data!;
+                            return ListView.builder(
+                              itemCount: medications.length,
+                              itemBuilder: (context, index) {
+                                return ListTile(
+                                  title: ReminderContainer(name: medications[index]['medication_name'], startDate: medications[index]['start_date'], 
+                                    endDate: medications[index]['end_date'], frequency: medications[index]['frequency'],),
+                                );
+                              },
+                            );
+                          }
+                        },
+                      );
+                    },
                   ),
                 ),
-              ),
             ),
           ],
         ),

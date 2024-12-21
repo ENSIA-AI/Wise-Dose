@@ -5,6 +5,7 @@ class CustomTextFormField extends StatefulWidget {
   final String label;
   final String hint;
   final String? Function(String?)? validate;
+  final void Function(String?) save;
   final double paddingTop;
   final double paddingBottom;
   final double paddingLeft;
@@ -20,7 +21,8 @@ class CustomTextFormField extends StatefulWidget {
     this.paddingBottom = 8.0,
     this.paddingLeft = 12.0,
     this.paddingRight = 12.0,
-    this.obscure = false
+    this.obscure = false,
+    required this.save
   });
 
   @override
@@ -56,6 +58,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         ),
       ),
       validator: widget.validate,
+      onSaved: (value) => widget.save(value),
     );
   }
 }

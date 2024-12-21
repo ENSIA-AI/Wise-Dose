@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wise_dose/blocs/medication_bloc/medication_bloc.dart';
+import 'package:wise_dose/blocs/medication_bloc/medication_event.dart';
 import 'package:wise_dose/blocs/medication_info_bloc/medication_info_bloc.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
@@ -14,31 +16,24 @@ import 'package:wise_dose/views/widgets/text_field.dart';
 class MedicationInfo extends StatelessWidget {
   final _formGlobalKey = GlobalKey<FormState>();
 
+  String _medName = '';
+  String _startDate = '';
+  String _endDate = '';
+  String _frequency = '';
+
+
+  MedicationInfo({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => MedicationInfoBloc(),
-      child: Scaffold(
+    return Scaffold(
         backgroundColor: Colors.white,
         body: Column(
           children: [
             getAppBarArrowBack(context),
             Expanded(
               child: SingleChildScrollView(
-                child: BlocConsumer<MedicationInfoBloc, MedicationInfoState>(
-                  listener: (context, state) {
-                    if (state is FormValidated) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("Form is valid!")),
-                      );
-                    } else if (state is FormInvalid) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("Form is invalid!")),
-                      );
-                    }
-                  },
-                  builder: (context, state) {
-                    return Column(
+                child: Column(
                       children: [
                         NumberPage(),
                         Form(
@@ -57,6 +52,9 @@ class MedicationInfo extends StatelessWidget {
                                       return "Please enter medication name.";
                                     }
                                     return null;
+                                  },
+                                  save: (value) {
+                                    _medName = value ?? '';
                                   },
                                 ),
                                 SizedBox(height: 15),
@@ -79,6 +77,9 @@ class MedicationInfo extends StatelessWidget {
                                           }
                                           return null;
                                         },
+                                        save: (value) {
+                                          _startDate = value ?? '';
+                                        },
                                       ),
                                     ),
                                     SizedBox(width: 8),
@@ -96,6 +97,9 @@ class MedicationInfo extends StatelessWidget {
                                             return "Enter end date.";
                                           }
                                           return null;
+                                        },
+                                        save: (value) {
+                                          _endDate = value ?? '';
                                         },
                                       ),
                                     ),
@@ -117,6 +121,9 @@ class MedicationInfo extends StatelessWidget {
                                             return "Enter frequency.";
                                           }
                                           return null;
+                                        },
+                                        save: (value) {
+                                          _frequency = value ?? '';
                                         },
                                       ),
                                     ),
@@ -165,9 +172,14 @@ class MedicationInfo extends StatelessWidget {
                                 SizedBox(height: 5),
                                 GradientButton(
                                   onPressed: () {
-                                    context.read<MedicationInfoBloc>().add(
-                                          ValidateFormEvent(_formGlobalKey),
-                                        );
+                                    if (_formGlobalKey.currentState!.validate()){
+                                      _formGlobalKey.currentState!.save();
+                                      print('----------------');
+                                      print(_medName);
+                                      print('----------------');
+                                      context.read<MedicationBloc>().add(AddMedication(name: _medName, startDate: _startDate, 
+                                        endDate: _endDate, frequency: _frequency));
+                                    }
                                   },
                                   text: "Add Medication",
                                   gradient: buttonColor,
@@ -178,14 +190,11 @@ class MedicationInfo extends StatelessWidget {
                           ),
                         ),
                       ],
-                    );
-                  },
-                ),
+                    )
               ),
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }
