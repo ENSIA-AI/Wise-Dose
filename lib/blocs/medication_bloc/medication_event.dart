@@ -14,3 +14,9 @@ final class AddMedication extends MedicationEvent {
     required this.frequency,
   });
 }
+
+
+final class CompletedMedication extends MedicationEvent {}
+
+
+final class OnGoingMedication extends MedicationEvent {}

@@ -7,7 +7,6 @@ import 'package:wise_dose/blocs/medication_bloc/medication_event.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
 import 'package:wise_dose/views/widgets/app_bar_arrow_back.dart';
-import 'package:wise_dose/views/widgets/date_text_field.dart';
 import 'package:wise_dose/views/widgets/gradient_button.dart';
 import 'package:wise_dose/views/widgets/number_picker.dart';
 import 'package:wise_dose/views/widgets/switch_button.dart';
@@ -67,7 +66,20 @@ class MedicationInfo extends StatelessWidget {
                                     Container(
                                       width: MediaQuery.of(context).size.width /
                                           3.5,
-                                      child: CustomDateTextFormField(),
+                                      child: CustomTextFormField(
+                                        label: 'Start date',
+                                        hint: 'dd/mm/yyyy',
+                                        validate: (value) {
+                                          if (value == null ||
+                                              value.isEmpty) {
+                                            return "Enter start date.";
+                                          }
+                                          return null;
+                                        },
+                                        save: (value) {
+                                          _startDate = value ?? '';
+                                        },
+                                      ),
                                     ),
                                     SizedBox(width: 8),
                                     Text("To :", style: standardText),
@@ -75,7 +87,20 @@ class MedicationInfo extends StatelessWidget {
                                     Container(
                                       width: MediaQuery.of(context).size.width /
                                           3.5,
-                                      child: CustomDateTextFormField()
+                                      child: CustomTextFormField(
+                                        label: 'End date',
+                                        hint: 'dd/mm/yyyy',
+                                        validate: (value) {
+                                          if (value == null ||
+                                              value.isEmpty) {
+                                            return "Enter end date.";
+                                          }
+                                          return null;
+                                        },
+                                        save: (value) {
+                                          _endDate = value ?? '';
+                                        },
+                                      ),
                                     ),
                                   ],
                                 ),

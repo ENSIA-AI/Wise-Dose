@@ -17,15 +17,32 @@ class DBBaseTable {
     return false;
   }
 
-  Future<List<Map>> getRecords() async {
+  Future<List<Map>> getOnGoingRecords() async {
     try {
       final database = await DBHelper.getDatabase();
       var data =
-          await database.rawQuery("select * from $db_table order by id DESC");
+          await database.rawQuery(
+            "SELECT * FROM $db_table WHERE DATE(end_date) >= DATE('now') ORDER BY id DESC"
+          );
       return data;
     } catch (e, stacktrace) {
       print('$e --> $stacktrace');
     }
     return [];
   }
+
+    Future<List<Map>> getCompletedRecords() async {
+    try {
+      final database = await DBHelper.getDatabase();
+      var data =
+          await database.rawQuery(
+            "SELECT * FROM $db_table WHERE DATE(end_date) < DATE('now') ORDER BY id DESC"
+          );
+      return data;
+    } catch (e, stacktrace) {
+      print('$e --> $stacktrace');
+    }
+    return [];
+  }
+
 }
