@@ -1,8 +1,7 @@
 import 'dart:async';
-import 'medication_table.dart';
-import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-
+import 'package:path/path.dart';
+import 'medication_table.dart';
 
 class DBHelper {
   static const _database_name = "MedicationDB.db";
@@ -10,24 +9,25 @@ class DBHelper {
   static var database;
 
   static List<String> sql_codes = [MedicationTable.sql_code];
-  static Future<Database> getDatabase() async {
 
+  // Get the database instance (singleton)
+  static Future<Database> getDatabase() async {
     if (database != null) {
       return database;
     }
 
-    database = openDatabase(
+    database = await openDatabase(
       join(await getDatabasesPath(), _database_name),
-      onCreate: (database, version) {
+      onCreate: (db, version) async {
         sql_codes.forEach((item) {
-          database.execute(item);
+          db.execute(item);
         });
       },
       version: _database_version,
       onUpgrade: (db, oldVersion, newVersion) {
-        //do nothing...
+        // Upgrade logic (if needed)
       },
     );
-    return database;
+    return database!;
   }
 }

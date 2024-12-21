@@ -4,15 +4,39 @@ import 'package:wise_dose/main.dart';
 
 
 
+class MedicationState {
+  final List<Map> ongoingMedications;
+  final List<Map> completedMedications;
+  final bool isSuccess;
 
+  MedicationState({
+    required this.ongoingMedications,
+    required this.completedMedications,
+    required this.isSuccess,
+  });
 
+  factory MedicationState.initial() {
+    return MedicationState(
+      ongoingMedications: [],
+      completedMedications: [],
+      isSuccess: false,
+    );
+  }
 
-class MedicationState extends Equatable {
-  final Future<List<Map<dynamic, dynamic>>> myList = MedDB.getMedications();
+  factory MedicationState.loaded(
+      List<Map> ongoingMedications, List<Map> completedMedications) {
+    return MedicationState(
+      ongoingMedications: ongoingMedications,
+      completedMedications: completedMedications,
+      isSuccess: true,
+    );
+  }
 
-  MedicationState();
-
-
-  @override
-  List<Object?> get props => [const DeepCollectionEquality().hash(myList)];
+  factory MedicationState.success() {
+    return MedicationState(
+      ongoingMedications: [],
+      completedMedications: [],
+      isSuccess: true,
+    );
+  }
 }

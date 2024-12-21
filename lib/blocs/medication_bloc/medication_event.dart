@@ -1,7 +1,6 @@
+abstract class MedicationEvent {}
 
-sealed class MedicationEvent {}
-
-final class AddMedication extends MedicationEvent {
+class AddMedication extends MedicationEvent {
   final String name;
   final String startDate;
   final String endDate;
@@ -13,4 +12,13 @@ final class AddMedication extends MedicationEvent {
     required this.endDate,
     required this.frequency,
   });
+}
+
+class LoadMedications extends MedicationEvent {}
+
+class UpdateMedicationStatus extends MedicationEvent {
+  final int id;
+  final String status;
+
+  UpdateMedicationStatus({required this.id, required this.status});
 }
