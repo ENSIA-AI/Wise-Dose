@@ -2,11 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wise_dose/blocs/medication_bloc/medication_bloc.dart';
+import 'package:wise_dose/blocs/medication_bloc/medication_state.dart';
 import 'package:wise_dose/views/screens/medication-info.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
 import 'package:wise_dose/views/widgets/app_bar.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wise_dose/views/widgets/reminder_container.dart';
 
 /// Bloc for managing the selected tab (Completed or On-going)
 class HistoryBloc extends Cubit<bool> {
@@ -81,17 +83,35 @@ class History extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: List.generate(
-                    4,
-                    (index) => const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: ReminderContainer(),
-                    ),
+              child: Expanded(
+                  child: BlocBuilder<MedicationBloc, MedicationState>(
+                    builder: (context, medState) {
+                      return FutureBuilder<List<Map<dynamic, dynamic>>>(
+                        future: medState.myList,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return const Center(child: CircularProgressIndicator());
+                          } else if (snapshot.hasError) {
+                            return Center(child: Text('Error: ${snapshot.error}'));
+                          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                            return const Center(child: Text('No medications found'));
+                          } else {
+                            final medications = snapshot.data!;
+                            return ListView.builder(
+                              itemCount: medications.length,
+                              itemBuilder: (context, index) {
+                                return ListTile(
+                                  title: ReminderContainer(name: medications[index]['medication_name'], startDate: medications[index]['start_date'], 
+                                    endDate: medications[index]['end_date'], frequency: medications[index]['frequency'],),
+                                );
+                              },
+                            );
+                          }
+                        },
+                      );
+                    },
                   ),
                 ),
-              ),
             ),
           ],
         ),
@@ -100,74 +120,3 @@ class History extends StatelessWidget {
   }
 }
 
-/// Stateless version of ReminderContainer
-class ReminderContainer extends StatelessWidget {
-  const ReminderContainer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 15),
-      padding: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: const Color.fromRGBO(0, 0, 0, 0.16),
-            blurRadius: 6,
-            spreadRadius: 0,
-            offset: const Offset(0, 3),
-          ),
-          BoxShadow(
-            color: const Color.fromRGBO(0, 0, 0, 0.23),
-            blurRadius: 6,
-            spreadRadius: 0,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              const Icon(
-                Icons.calendar_month_outlined,
-                size: 30,
-                color: Color(0xff214353),
-              ),
-              const SizedBox(width: 8),
-              Text('For Me:', style: standardText),
-              const SizedBox(width: 4),
-              Text('Paracetamol', style: boldStandardText),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Row(
-            children: [
-              SvgPicture.asset("assets/icons/Clock.svg"),
-              const SizedBox(width: 8),
-              Text('From:', style: titleText),
-              const SizedBox(width: 4),
-              Text('01 Oct, 2024', style: boldTitleText),
-              const SizedBox(width: 4),
-              Text('To', style: titleText),
-              const SizedBox(width: 4),
-              Text('01 Nov, 2024', style: boldTitleText),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Row(
-            children: [
-              SvgPicture.asset('assets/icons/Frequency-Icon.svg'),
-              const SizedBox(width: 8),
-              Text('Two', style: boldTitleText),
-              const SizedBox(width: 4),
-              Text('per day', style: titleText),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}

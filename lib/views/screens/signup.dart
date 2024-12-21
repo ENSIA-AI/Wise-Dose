@@ -50,7 +50,9 @@ class _SignupState extends State<Signup> {
                                   return "Invalid User Name";
                                 }
                                 return null;
-                              }),
+                              },
+                              save: (value) {},
+                              ),
                           const SizedBox(
                             height: 20,
                           ),
@@ -64,7 +66,9 @@ class _SignupState extends State<Signup> {
                                   return "Invalid email address";
                                 }
                                 return null;
-                              }),
+                              },
+                              save: (value) {},
+                              ),
                           const SizedBox(
                             height: 20,
                           ),
@@ -99,7 +103,9 @@ class _SignupState extends State<Signup> {
                                   return "Password Must have At Most 20 characters";
                                 }
                                 return null;
-                              }),
+                              },
+                              save: (value) {},
+                              ),
                           const SizedBox(
                             height: 20,
                           ),
@@ -112,7 +118,9 @@ class _SignupState extends State<Signup> {
                                   return "Password Do Not Match";
                                 }
                                 return null;
-                              }),
+                              },
+                              save: (value) {},
+                              ),
                           const SizedBox(
                             height: 20,
                           ),

@@ -47,7 +47,9 @@ class _LoginState extends State<Login> {
                                   return "Invalid User Name";
                                 }
                                 return null;
-                              }),
+                              },
+                              save: (value) {},
+                              ),
                           const SizedBox(
                             height: 20,
                           ),
@@ -81,7 +83,9 @@ class _LoginState extends State<Login> {
                                   return "Password Must have At Most 20 characters";
                                 }
                                 return null;
-                              }),
+                              },                                   
+                              save: (value) {},
+                            ),
                           const SizedBox(
                             height: 20,
                           ),
