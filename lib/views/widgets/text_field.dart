@@ -17,12 +17,12 @@ class CustomTextFormField extends StatefulWidget {
     required this.label,
     required this.hint,
     required this.validate,
+    required this.save,
     this.paddingTop = 8.0,
     this.paddingBottom = 8.0,
     this.paddingLeft = 12.0,
     this.paddingRight = 12.0,
     this.obscure = false,
-    required this.save
   });
 
   @override

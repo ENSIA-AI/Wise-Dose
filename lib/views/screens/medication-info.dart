@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wise_dose/blocs/medication_bloc/medication_bloc.dart';
 import 'package:wise_dose/blocs/medication_bloc/medication_event.dart';
-import 'package:wise_dose/blocs/medication_info_bloc/medication_info_bloc.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
 import 'package:wise_dose/views/widgets/app_bar_arrow_back.dart';
