@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wise_dose/blocs/medication_bloc/medication_bloc.dart';
+import 'package:wise_dose/blocs/medication_bloc/medication_event.dart';
 import 'package:wise_dose/blocs/medication_bloc/medication_state.dart';
 import 'package:wise_dose/views/screens/medication-info.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
@@ -57,6 +58,7 @@ class History extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           context.read<HistoryBloc>().toggleSelection();
+                          context.read<MedicationBloc>().add(CompletedMedication());
                         },
                         child: Text(
                           'Completed',
@@ -68,6 +70,7 @@ class History extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           context.read<HistoryBloc>().toggleSelection();
+                          context.read<MedicationBloc>().add(OnGoingMedication());
                         },
                         child: Text(
                           'On-going',

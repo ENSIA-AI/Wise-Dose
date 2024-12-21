@@ -55,7 +55,7 @@ class DateInputFormatter extends TextInputFormatter {
     StringBuffer newText = StringBuffer();
     for (int i = 0; i < text.length; i++) {
       newText.write(text[i]);
-      if (i == 3 || i == 6) {
+      if (i == 3 || i == 5) {
         newText.write('-');
       }
     }

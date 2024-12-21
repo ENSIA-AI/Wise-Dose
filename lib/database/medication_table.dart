@@ -13,7 +13,13 @@ class MedicationTable extends DBBaseTable {
         ''';
 
   Future<List<Map>> getMedications() async {
-    List<Map> obj = await getRecords();
+    List<Map> obj = await getOnGoingRecords();
     return obj;
   }
+
+    Future<List<Map>> getCompletedMedications() async {
+    List<Map> obj = await getCompletedRecords();
+    return obj;
+  }
+
 }

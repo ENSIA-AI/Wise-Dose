@@ -6,7 +6,7 @@ import 'medication_event.dart';
 import 'package:wise_dose/main.dart';
 
 class MedicationBloc extends Bloc<MedicationEvent, MedicationState> {
-  MedicationBloc() : super(MedicationState()) {
+  MedicationBloc() : super(MedicationOnGoingState()) {
     on<AddMedication>((event, emit) {
       MedDB.insertRecord(
         {
@@ -16,7 +16,15 @@ class MedicationBloc extends Bloc<MedicationEvent, MedicationState> {
           'frequency': event.frequency
         }
       );
-      emit(MedicationState());
+      emit(MedicationOnGoingState());
+    },);
+
+    on<CompletedMedication>((event, emit) {
+      emit(MedicationCompletedState());
+    },);
+
+    on<OnGoingMedication>((event, emit) {
+      emit(MedicationOnGoingState());
     },);
   }
 }

@@ -4,15 +4,31 @@ import 'package:wise_dose/main.dart';
 
 
 
+sealed class MedicationState extends Equatable {
+  late final Future<List<Map<dynamic, dynamic>>> myList;
+
+    @override
+  List<Object?> get props => [const DeepCollectionEquality().hash(myList)];
+
+}
 
 
 
-class MedicationState extends Equatable {
+class MedicationOnGoingState extends MedicationState {
+  @override
   final Future<List<Map<dynamic, dynamic>>> myList = MedDB.getMedications();
 
-  MedicationState();
+  MedicationOnGoingState();
+
+}
 
 
+class MedicationCompletedState extends MedicationState {
   @override
-  List<Object?> get props => [const DeepCollectionEquality().hash(myList)];
+  final Future<List<Map<dynamic, dynamic>>> myList = MedDB.getCompletedMedications();
+
+  MedicationCompletedState();
+
+
+
 }
