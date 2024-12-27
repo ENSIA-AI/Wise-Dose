@@ -153,7 +153,7 @@ class MedicationInfo extends StatelessWidget {
                                   },
                                 ),
                                 SizedBox(height: 15),
-                                Row(
+                                /* Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
@@ -167,7 +167,7 @@ class MedicationInfo extends StatelessWidget {
                                     SizedBox(width: 4),
                                     ToggleSwitch(),
                                   ],
-                                ),
+                                ), */
                                 SizedBox(height: 5),
                                 GradientButton(
                                   onPressed: () {

@@ -58,10 +58,10 @@ class History extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           context.read<HistoryBloc>().toggleSelection();
-                          context.read<MedicationBloc>().add(CompletedMedication());
+                          context.read<MedicationBloc>().add(OnGoingMedication());
                         },
                         child: Text(
-                          'Completed',
+                          'On-going',
                           style: completedSelected
                               ? orangeBoldHeaderTextUnderlined
                               : greyBoldHeaderText,
@@ -70,10 +70,10 @@ class History extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           context.read<HistoryBloc>().toggleSelection();
-                          context.read<MedicationBloc>().add(OnGoingMedication());
+                          context.read<MedicationBloc>().add(CompletedMedication());
                         },
                         child: Text(
-                          'On-going',
+                          'Completed',
                           style: completedSelected
                               ? greyBoldHeaderText
                               : orangeBoldHeaderTextUnderlined,
