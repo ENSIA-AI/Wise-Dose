@@ -38,7 +38,7 @@ class AlternativeLogin extends StatelessWidget {
                 ElevatedButton(
                   onPressed: (){},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                    backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     shadowColor: Colors.transparent,
                     side: const BorderSide(
@@ -60,7 +60,7 @@ class AlternativeLogin extends StatelessWidget {
                 ElevatedButton(
                   onPressed: (){},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                    backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     shadowColor: Colors.transparent,
                     side: const BorderSide(
