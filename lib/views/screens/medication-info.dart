@@ -145,27 +145,54 @@ class MedicationInfo extends StatelessWidget {
                         ),
                         SizedBox(height: 15),
                         Row(
-                          children: [
-                            Text("Frequency :", style: standardText),
-                            SizedBox(width: 12),
-                            Container(
-                              width: 120,
-                              child: CustomTextFormField(
-                                label: '',
-                                hint: 'Daily',
-                                validate: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return "Enter frequency.";
-                                  }
-                                  return null;
-                                },
-                                save: (value) {
-                                  _frequency = value ?? '';
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
+  children: [
+    Text("Frequency :", style: standardText),
+    SizedBox(width: 12),
+    Container(
+      width: 200, // Adjust width as needed
+      child: DropdownButtonFormField<String>(
+        value: 'Every day', // Initial value, should match one of the items or be null
+        decoration: InputDecoration(
+          labelText: "Select Frequency",
+          labelStyle: TextStyle(color: Colors.grey, fontSize: 12),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: lightBlue, width: 2.0), // Custom border color
+          ),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+        ),
+        items: [
+          DropdownMenuItem(value: 'Every day', child: Text('Every day')),
+          DropdownMenuItem(value: 'Every two days', child: Text('Every two days')),
+          DropdownMenuItem(value: 'Every three days', child: Text('Every three days')),
+          DropdownMenuItem(value: 'Custom', child: Text('Custom')),
+        ],
+        onChanged: (value) {
+          
+            _frequency = value ?? '';
+          
+        },
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return "Please select a frequency.";
+          }
+          return null;
+        },
+        onSaved: (value) {
+          _frequency = value ?? '';
+        },
+        // Adding a custom dropdown style
+        dropdownColor: Colors.white,
+        icon: Icon(Icons.arrow_drop_down, color: lightBlue),
+      ),
+    ),
+  ],
+),
+
+
                         SizedBox(height: 5),
                         Text('Details', style: paragraphText),
                         SizedBox(height: 4),
