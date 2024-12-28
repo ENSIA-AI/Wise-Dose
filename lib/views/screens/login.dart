@@ -30,10 +30,8 @@ class _LoginState extends State<Login> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(top: 20, bottom: 20),
-                      child: Image.asset(
-                        "assets/images/Logo.png",
-                      ),
+                      margin: const EdgeInsets.only(top: 10, bottom: 20,),
+                      child: Image.asset("assets/images/Logo.jpeg", height: 125),
                     ),
                     Form(
                       key: _formGlobalKey,

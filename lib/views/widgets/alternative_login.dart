@@ -72,7 +72,7 @@ class AlternativeLogin extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SvgPicture.asset("assets/icons/google.svg", height: 10, width: 10,),
+                      SvgPicture.asset("assets/icons/google.svg", height: 20, width: 20,),
                       const SizedBox(width: 10,),
                       const Text("Google", style: paragraphText,)
                     ],
