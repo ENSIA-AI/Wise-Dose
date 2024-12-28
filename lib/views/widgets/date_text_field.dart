@@ -39,7 +39,27 @@ class CustomDateTextFormField extends StatelessWidget {
         FilteringTextInputFormatter.digitsOnly,
         DateInputFormatter(),
       ],
-      validator: (value) {},
+      validator: (value) {
+  if (value == null || value.isEmpty) {
+    return 'Date is required';
+  }
+  final regex = RegExp(r'^\d{4}-\d{2}-\d{2}$');
+  if (!regex.hasMatch(value)) {
+    return 'Enter a valid date (yyyy-mm-dd)';
+  }
+  // Additional validation for actual calendar date
+  try {
+    final parts = value.split('-');
+    final year = int.parse(parts[0]);
+    final month = int.parse(parts[1]);
+    final day = int.parse(parts[2]);
+    DateTime(year, month, day);
+  } catch (_) {
+    return 'Enter a valid calendar date';
+  }
+  return null;
+},
+
       onSaved: (value) => {},
     );
   }
