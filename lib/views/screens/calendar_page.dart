@@ -109,10 +109,7 @@ class _MedicationCalendarPageState extends State<MedicationCalendarPage> {
                     return Center(
                       child: Text(
                         formattedDate,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: boldTitleText,
                       ),
                     );
                   },

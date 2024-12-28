@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
 
 class CustomTextFormField extends StatelessWidget {
+
   final String label;
   final String hint;
   final String? Function(String?)? validate;
@@ -11,6 +13,7 @@ class CustomTextFormField extends StatelessWidget {
   final double paddingLeft;
   final double paddingRight;
   final bool obscure;
+  final List<TextInputFormatter>? inputFormatters;
 
   const CustomTextFormField({
     super.key,
@@ -23,6 +26,7 @@ class CustomTextFormField extends StatelessWidget {
     this.paddingLeft = 12.0,
     this.paddingRight = 12.0,
     this.obscure = false,
+     this.inputFormatters,
   });
 
   @override
@@ -30,6 +34,7 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       obscureText: obscure,
       cursorColor: lightBlue,
+      inputFormatters: widget.inputFormatters,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),

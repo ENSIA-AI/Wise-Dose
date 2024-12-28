@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wise_dose/blocs/medication_bloc/medication_bloc.dart';
 import 'package:wise_dose/database/medication_table.dart';
 import 'package:wise_dose/views/screens/calendar_page.dart';
+import 'package:wise_dose/views/screens/history.dart';
 import 'package:wise_dose/views/screens/login.dart';
 import 'package:wise_dose/views/screens/onboarding.dart';
 import 'package:wise_dose/views/screens/signup.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: Bottom_Nav_Bar(),
+        home: Onboarding(),
         debugShowCheckedModeBanner: false,
       ),
     );
