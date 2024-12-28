@@ -45,6 +45,8 @@ dependencies:
   collection: ^1.18.0
   sqflite: ^2.4.1
   path: ^1.9.0
+  jovial_svg: ^1.1.24
+  flutter_native_splash: ^2.4.3
 
 dev_dependencies:
   flutter_test:
@@ -113,3 +115,14 @@ flutter:
         - asset: assets/fonts/Roboto/Roboto-Italic.ttf
           style: italic
 
+
+flutter_native_splash:
+  color: '#ffffff'
+  image: assets/images/Splash.png
+  android_12:
+    image: assets/images/Splash.png
+    # Splash screen background color.
+    color: '#ffffff'
+   # App icon background color.
+    icon_background_color: "#ffffff"
+  android_gravity: fill

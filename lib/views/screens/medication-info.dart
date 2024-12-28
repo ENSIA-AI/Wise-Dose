@@ -12,7 +12,6 @@ import 'package:wise_dose/views/widgets/app_bar_arrow_back.dart';
 // import 'package:wise_dose/views/widgets/date_text_field.dart';
 import 'package:wise_dose/views/widgets/gradient_button.dart';
 import 'package:wise_dose/views/widgets/number_picker.dart';
-import 'package:wise_dose/views/widgets/switch_button.dart';
 import 'package:wise_dose/views/widgets/text_field.dart';
 
 class MedicationInfo extends StatelessWidget {

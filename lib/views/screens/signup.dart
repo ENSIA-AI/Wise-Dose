@@ -26,6 +26,7 @@ class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
         body: SingleChildScrollView(
       child: Center(
           child: Container(
@@ -34,8 +35,8 @@ class _SignupState extends State<Signup> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(top: 20),
-                      child: Image.asset("assets/images/Logo.png"),
+                      margin: const EdgeInsets.only(top: 10),
+                      child: Image.asset("assets/images/Logo.jpeg", height: 125),
                     ),
                     Form(
                       key: _formGlobalKey,
@@ -122,7 +123,7 @@ class _SignupState extends State<Signup> {
                               save: (value) {},
                               ),
                           const SizedBox(
-                            height: 20,
+                            height: 5,
                           ),
                           Row(children: [
                             Expanded(
@@ -157,7 +158,7 @@ class _SignupState extends State<Signup> {
                               ],
                             )),
                           ]),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 5),
                           GradientButton(
                               onPressed: () {
                                 if (_formGlobalKey.currentState!.validate()) {

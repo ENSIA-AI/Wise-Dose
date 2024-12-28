@@ -38,7 +38,7 @@ class AlternativeLogin extends StatelessWidget {
                 ElevatedButton(
                   onPressed: (){},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                    backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     shadowColor: Colors.transparent,
                     side: const BorderSide(
@@ -60,7 +60,7 @@ class AlternativeLogin extends StatelessWidget {
                 ElevatedButton(
                   onPressed: (){},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                    backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     shadowColor: Colors.transparent,
                     side: const BorderSide(
@@ -72,7 +72,7 @@ class AlternativeLogin extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SvgPicture.asset("assets/icons/google.svg", height: 10, width: 10,),
+                      SvgPicture.asset("assets/icons/google.svg", height: 20, width: 20,),
                       const SizedBox(width: 10,),
                       const Text("Google", style: paragraphText,)
                     ],
