@@ -12,12 +12,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           /*
             Supabase Auth Here
           */ 
-          if(event.userName == "Rayane"){
-              emit(LoginSuccess());
-            }
-          else {
-            emit(LoginError("Error test"));
-          }
+          emit(LoginSuccess());
         } catch (e) {
           emit(LoginError(e.toString()));
         }
