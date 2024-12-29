@@ -187,10 +187,10 @@ class _SignupState extends State<Signup> {
                         const SizedBox(width: 15),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
+                            Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const Login()),
+                                  builder: (context) => Login()),
                             );
                           },
                           child: const Text("Login",
