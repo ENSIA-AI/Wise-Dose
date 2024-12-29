@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wise_dose/blocs/login_bloc/login_bloc.dart';
+import 'package:wise_dose/blocs/login_bloc/login_event.dart';
+import 'package:wise_dose/blocs/login_bloc/login_state.dart';
 import 'package:wise_dose/cubits/remember_pwd_cubit.dart';
 import 'package:wise_dose/views/screens/signup.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
 import 'package:wise_dose/views/widgets/alternative_login.dart';
+import 'package:wise_dose/views/widgets/auth_alert.dart';
 import 'package:wise_dose/views/widgets/bottom_bar.dart';
 import 'package:wise_dose/views/widgets/gradient_button.dart';
 import 'package:wise_dose/views/widgets/text_field.dart';
@@ -16,6 +20,10 @@ class Login extends StatelessWidget {
   final _formGlobalKey = GlobalKey<FormState>();
 
   Login({super.key});
+
+  String _username = '';
+  String _password = '';
+
 
 
   @override
@@ -45,6 +53,7 @@ class Login extends StatelessWidget {
                                     .hasMatch(value ?? "")) {
                                   return "Invalid User Name";
                                 }
+                                _username = value ?? '';
                                 return null;
                               },
                               save: (value) {},
@@ -81,6 +90,7 @@ class Login extends StatelessWidget {
                                 if (hasMinLength > 20) {
                                   return "Password Must have At Most 20 characters";
                                 }
+                                _password = value;
                                 return null;
                               },                                   
                               save: (value) {},
@@ -129,18 +139,29 @@ class Login extends StatelessWidget {
                             )
                           ]),
                           const SizedBox(height: 10),
-                          GradientButton(
+                          BlocBuilder<LoginBloc, LoginState>(builder: (context, state){
+                            return (
+                              GradientButton(
                               onPressed: () {
                                 if (_formGlobalKey.currentState!.validate()) {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              Bottom_Nav_Bar()));
+                                  context.read<LoginBloc>().add(LoginSubmitted(userName: _username, password: _password));   
+                                  if (state is LoginError) {
+                                    // Show Alarm for error 
+                                    showAlarmDialog(context);
+                                  } 
+                                  else if(state is LoginSuccess){
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => const Bottom_Nav_Bar()),
+                                        (route) => false, // This condition removes all routes from the stack
+                                      );
+                                  }                                              
                                 }
                               },
                               text: "Login",
-                              gradient: buttonColor),
+                              gradient: buttonColor)
+                            );
+                          })   
                         ],
                       ),
                     ),
@@ -183,3 +204,4 @@ class Login extends StatelessWidget {
     ));
   }
 }
+
