@@ -34,7 +34,7 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       obscureText: obscure,
       cursorColor: lightBlue,
-      inputFormatters: widget.inputFormatters,
+      inputFormatters: inputFormatters,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),

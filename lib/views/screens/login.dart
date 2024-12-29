@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wise_dose/cubits/remember_pwd_cubit.dart';
 import 'package:wise_dose/views/screens/signup.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
@@ -7,16 +9,14 @@ import 'package:wise_dose/views/widgets/bottom_bar.dart';
 import 'package:wise_dose/views/widgets/gradient_button.dart';
 import 'package:wise_dose/views/widgets/text_field.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
 
-  @override
-  State<Login> createState() => _LoginState();
-}
 
-class _LoginState extends State<Login> {
+
+class Login extends StatelessWidget {
   final _formGlobalKey = GlobalKey<FormState>();
-  bool isChecked = false;
+
+  Login({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -90,30 +90,33 @@ class _LoginState extends State<Login> {
                           ),
                           Row(children: [
                             Expanded(
-                                child: Row(
+                              child: Row(
                               children: [
-                                Transform.scale(
-                                  scale:
-                                      1, // Adjust the scale to make the checkbox bigger
-                                  child: Checkbox(
-                                    value: isChecked,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(4)),
-                                    side: const BorderSide(
-                                      color: darkBlue, // Border color
-                                      width: 0.5, // Border width
-                                    ),
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        isChecked = value!;
-                                      });
-                                    },
-                                    activeColor:
-                                        Colors.orange, // Color when checked
-                                    checkColor:
-                                        Colors.white, // Color of the checkmark
-                                  ),
-                                ),
+                                BlocBuilder<RememberPwdCubit, bool>(
+                                  builder: (context, isChecked){
+                                  return (
+                                    Transform.scale(
+                                      scale:
+                                          1, // Adjust the scale to make the checkbox bigger
+                                      child: Checkbox(
+                                        value: isChecked,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(4)),
+                                        side: const BorderSide(
+                                          color: darkBlue, // Border color
+                                          width: 0.5, // Border width
+                                        ),
+                                        onChanged: (bool? value) {
+                                          context.read<RememberPwdCubit>().changeRememberState();
+                                        },
+                                        activeColor:
+                                            Colors.orange, // Color when checked
+                                        checkColor:
+                                            Colors.white, // Color of the checkmark
+                                      ),
+                                    )
+                                  );
+                                }),                         
                                 const Text(
                                   "Remember password",
                                   style: paragraphText,
@@ -165,7 +168,7 @@ class _LoginState extends State<Login> {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Signup()));
+                                      builder: (context) => const Signup()));
                             },
                             child: const Text("Signup",
                                 style: TextStyle(
