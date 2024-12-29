@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
 
+class CustomTextFormField extends StatelessWidget {
 
-class CustomTextFormField extends StatefulWidget {
   final String label;
   final String hint;
   final String? Function(String?)? validate;
@@ -30,14 +30,9 @@ class CustomTextFormField extends StatefulWidget {
   });
 
   @override
-  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
-}
-
-class _CustomTextFormFieldState extends State<CustomTextFormField> {
-  @override
   Widget build(BuildContext context) {
     return TextFormField(
-      obscureText: widget.obscure,
+      obscureText: obscure,
       cursorColor: lightBlue,
       inputFormatters: widget.inputFormatters,
       decoration: InputDecoration(
@@ -50,20 +45,21 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           borderSide: const BorderSide(color: lightBlue, width: 2.0),
         ),
         contentPadding: EdgeInsets.only(
-            top: widget.paddingTop,
-            right: widget.paddingRight,
-            bottom: widget.paddingBottom,
-            left: widget.paddingLeft),
-        hintText: widget.hint,
+          top: paddingTop,
+          right: paddingRight,
+          bottom: paddingBottom,
+          left: paddingLeft,
+        ),
+        hintText: hint,
         hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
-        labelText: widget.label,
+        labelText: label,
         labelStyle: const TextStyle(color: Colors.grey, fontSize: 12),
         errorStyle: const TextStyle(
           fontSize: 8,
         ),
       ),
-      validator: widget.validate,
-      onSaved: (value) => widget.save(value),
+      validator: validate,
+      onSaved: (value) => save(value),
     );
   }
 }
