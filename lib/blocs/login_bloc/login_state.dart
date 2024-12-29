@@ -4,13 +4,13 @@ import 'package:equatable/equatable.dart';
 
 abstract class LoginState extends Equatable {
   @override
-    List<Object> get props => [];
+    List<String> get props => [];
 }
 
 
 class LoginInitial extends LoginState {
   @override
-    List<Object> get props => ['loading'];
+    List<String> get props => ['loading'];
 }
 
 
@@ -19,13 +19,13 @@ class LoginLoading extends LoginState {}
 
 class LoginSuccess extends LoginState {
   @override
-    List<Object> get props => ['logged'];
+    List<String> get props => ['logged'];
 }
 
 
 class LoginError extends LoginState {
   final String message;
   @override
-    List<Object> get props => ['error'];
+    List<String> get props => ['error'];
   LoginError(this.message);
 }

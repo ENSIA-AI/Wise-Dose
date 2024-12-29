@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wise_dose/blocs/login_bloc/login_bloc.dart';
 import 'package:wise_dose/blocs/medication_bloc/medication_bloc.dart';
 import 'package:wise_dose/cubits/remember_pwd_cubit.dart';
 import 'package:wise_dose/database/medication_table.dart';
@@ -26,9 +27,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
+      providers: [ 
         BlocProvider(create: (_) => MedicationBloc()),
-        BlocProvider(create: (_) => RememberPwdCubit())
+        BlocProvider(create: (_) => RememberPwdCubit()),
+        BlocProvider(create: (_) => LoginBloc())
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
