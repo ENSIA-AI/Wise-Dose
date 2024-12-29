@@ -1,27 +1,33 @@
 // ignore_for_file: unused_import, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wise_dose/blocs/signup_bloc/signup_bloc.dart';
+import 'package:wise_dose/blocs/signup_bloc/signup_event.dart';
+import 'package:wise_dose/blocs/signup_bloc/signup_state.dart';
+import 'package:wise_dose/cubits/remember_pwd_cubit.dart';
 import 'package:wise_dose/views/screens/calendar_page.dart';
 import 'package:wise_dose/views/screens/login.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
 import 'package:wise_dose/views/widgets/alternative_login.dart';
+import 'package:wise_dose/views/widgets/auth_alert.dart';
 import 'package:wise_dose/views/widgets/bottom_bar.dart';
 import 'package:wise_dose/views/widgets/gradient_button.dart';
 import 'package:wise_dose/views/widgets/text_field.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Signup extends StatefulWidget {
-  const Signup({super.key});
-
-  @override
-  State<Signup> createState() => _SignupState();
-}
-
-class _SignupState extends State<Signup> {
+class Signup extends StatelessWidget {
   final _formGlobalKey = GlobalKey<FormState>();
-  bool isChecked = false;
-  String confPassword = "";
+  String _email = '';
+  String _username = '';
+  String _password = '';
+  String confPassword = '';
+
+  Signup({super.key});
+
+  
+
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +56,7 @@ class _SignupState extends State<Signup> {
                                     .hasMatch(value ?? "")) {
                                   return "Invalid User Name";
                                 }
+                                _username = value ?? '';
                                 return null;
                               },
                               save: (value) {},
@@ -66,6 +73,7 @@ class _SignupState extends State<Signup> {
                                     .hasMatch(value ?? "")) {
                                   return "Invalid email address";
                                 }
+                                _email = value ?? '';
                                 return null;
                               },
                               save: (value) {},
@@ -103,6 +111,7 @@ class _SignupState extends State<Signup> {
                                 if (hasMinLength > 20) {
                                   return "Password Must have At Most 20 characters";
                                 }
+                                _password = value;
                                 return null;
                               },
                               save: (value) {},
@@ -129,28 +138,31 @@ class _SignupState extends State<Signup> {
                             Expanded(
                                 child: Row(
                               children: [
-                                Transform.scale(
-                                  scale:
-                                      1, // Adjust the scale to make the checkbox bigger
-                                  child: Checkbox(
-                                    value: isChecked,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(4)),
-                                    side: const BorderSide(
-                                      color: darkBlue, // Border color
-                                      width: 0.5, // Border width
-                                    ),
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        isChecked = value!;
-                                      });
-                                    },
-                                    activeColor:
-                                        Colors.orange, // Color when checked
-                                    checkColor:
-                                        Colors.white, // Color of the checkmark
-                                  ),
-                                ),
+                                BlocBuilder<RememberPwdCubit, bool>(
+                                  builder: (context, isChecked){
+                                  return (
+                                    Transform.scale(
+                                      scale:
+                                          1, // Adjust the scale to make the checkbox bigger
+                                      child: Checkbox(
+                                        value: isChecked,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(4)),
+                                        side: const BorderSide(
+                                          color: darkBlue, // Border color
+                                          width: 0.5, // Border width
+                                        ),
+                                        onChanged: (bool? value) {
+                                          context.read<RememberPwdCubit>().changeRememberState();
+                                        },
+                                        activeColor:
+                                            Colors.orange, // Color when checked
+                                        checkColor:
+                                            Colors.white, // Color of the checkmark
+                                      ),
+                                    )
+                                  );
+                                }), 
                                 const Text(
                                   "Remember password",
                                   style: paragraphText,
@@ -159,18 +171,29 @@ class _SignupState extends State<Signup> {
                             )),
                           ]),
                           const SizedBox(height: 5),
-                          GradientButton(
+                          BlocBuilder<SignupBloc, SignupState>(builder: (context, state){
+                            return (
+                              GradientButton(
                               onPressed: () {
                                 if (_formGlobalKey.currentState!.validate()) {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              Bottom_Nav_Bar()));
+                                  context.read<SignupBloc>().add(SignupSubmitted(userName: _username, password: _password));   
+                                  if (state is SignupError) {
+                                    // Show Alarm for error 
+                                    showAlarmDialog(context);
+                                  } 
+                                  else if(state is SignupSuccess){
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => const Bottom_Nav_Bar()),
+                                        (route) => false, // This condition removes all routes from the stack
+                                      );
+                                  }                                              
                                 }
                               },
-                              text: "Signup",
-                              gradient: buttonColor),
+                              text: "Login",
+                              gradient: buttonColor)
+                            );
+                          })   
                         ],
                       ),
                     ),
