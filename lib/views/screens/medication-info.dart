@@ -86,8 +86,19 @@ class MedicationInfo extends StatelessWidget {
                                     if (parsedDate.year != year || parsedDate.month != month || parsedDate.day != day) {
                                          return 'Enter a valid calendar date.';
                                         } // Validates the actual date
+                                         if ( _endDate.isNotEmpty) {
+                                                final endParts = _endDate!.split('-');
+                                                final endYear = int.parse(endParts[0]);
+                                                final endMonth = int.parse(endParts[1]);
+                                                final endDay = int.parse(endParts[2]);
+                                                 final endDate = DateTime(endYear, endMonth, endDay);
+
+                                               if (parsedDate.isAfter(endDate)) {
+                                                     return 'start date must be .';
+                                                    }
+                                                }
                                   } catch (_) {
-                                    return 'Enter a valid calendar date.';
+                                    return 'Enter a valid  date.';
                                   }
                                   return null;
                                 },
@@ -123,9 +134,20 @@ class MedicationInfo extends StatelessWidget {
                                     final month = int.parse(parts[1]);
                                     final day = int.parse(parts[2]);
                                      final parsedDate = DateTime(year, month, day);
-  if (parsedDate.year != year || parsedDate.month != month || parsedDate.day != day) {
-    return 'Enter a valid calendar date.';
-  } // Validates the actual date
+                                     if (parsedDate.year != year || parsedDate.month != month || parsedDate.day != day) {
+                                       return 'Enter a valid calendar date.';
+                                        } // Validates the actual date
+                                         if ( _startDate.isNotEmpty) {
+                                                final startParts = _startDate!.split('-');
+                                                final startYear = int.parse(startParts[0]);
+                                                final startMonth = int.parse(startParts[1]);
+                                                final startDay = int.parse(startParts[2]);
+                                                 final startDate = DateTime(startYear, startMonth, startDay);
+
+                                               if (parsedDate.isBefore(startDate)) {
+                                                     return 'before the end date.';
+                                                    }
+                                                } 
                                   } catch (_) {
                                     return 'Enter a valid calendar date.';
                                   }
@@ -236,6 +258,8 @@ class MedicationInfo extends StatelessWidget {
                         SizedBox(height: 5),
                         GradientButton(
                           onPressed: () {
+                             // Save form data first to update `_startDate`
+                             _formGlobalKey.currentState!.save();
                             if (_formGlobalKey.currentState!.validate()) {
                               _formGlobalKey.currentState!.save();
                               print('----------------');

@@ -76,7 +76,7 @@ class ReminderContainer extends StatelessWidget {
               const SizedBox(width: 8),
               Text(frequency, style: boldParagraphText),
               const SizedBox(width: 4),
-              Text('per day', style: paragraphText),
+              // Text('per day', style: paragraphText),
             ],
           ),
         ],
