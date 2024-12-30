@@ -12,11 +12,20 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
           /*
             Supabase Auth Here
           */ 
-          emit(SignupSuccess());
+          if(event.email == 'rayane@gmail.com'){
+            emit(SignupError("Rayane isn't allowed to enter"));
+          } else {
+            emit(SignupSuccess());
+          }
           
         } catch (e) {
           emit(SignupError(e.toString()));
         }
       });
+
+
+      on<SignupReInitialized>((event, emit) {
+        emit(SignupInitial());
+      },);
     }
 }

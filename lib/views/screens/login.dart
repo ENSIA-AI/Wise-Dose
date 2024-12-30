@@ -21,16 +21,14 @@ class Login extends StatelessWidget {
 
   Login({super.key});
 
-  String _username = '';
+  String _email = '';
   String _password = '';
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
-        body: SingleChildScrollView(
+        body:  SingleChildScrollView(
       child: Center(
           child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -46,14 +44,15 @@ class Login extends StatelessWidget {
                       child: Column(
                         children: [
                           CustomTextFormField(
-                              label: "UserName",
-                              hint: "UserName",
+                              label: "Email",
+                              hint: "Enter Email",
                               validate: (value) {
-                                if (!RegExp(r'^[a-zA-Z0-9]+$')
+                                if (!RegExp(
+                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                     .hasMatch(value ?? "")) {
-                                  return "Invalid User Name";
+                                  return "Invalid email address";
                                 }
-                                _username = value ?? '';
+                                _email = value ?? '';
                                 return null;
                               },
                               save: (value) {},
@@ -139,29 +138,31 @@ class Login extends StatelessWidget {
                             )
                           ]),
                           const SizedBox(height: 10),
-                          BlocBuilder<LoginBloc, LoginState>(builder: (context, state){
-                            return (
-                              GradientButton(
-                              onPressed: () {
-                                if (_formGlobalKey.currentState!.validate()) {
-                                  context.read<LoginBloc>().add(LoginSubmitted(userName: _username, password: _password));   
-                                  if (state is LoginError) {
-                                    // Show Alarm for error 
-                                    showAlarmDialog(context);
-                                  } 
-                                  else if(state is LoginSuccess){
-                                    Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => const Bottom_Nav_Bar()),
-                                        (route) => false, // This condition removes all routes from the stack
-                                      );
-                                  }                                              
-                                }
-                              },
-                              text: "Login",
-                              gradient: buttonColor)
-                            );
-                          })   
+                          BlocConsumer<LoginBloc, LoginState>(
+                            builder: (context, state) {
+                              return GradientButton(
+                                  onPressed: () {
+                                    if (_formGlobalKey.currentState!.validate()) {
+                                      context.read<LoginBloc>().add(LoginSubmitted(email: _email, password: _password));  
+                                    }
+                                  },
+                                  text: "Login",
+                                  gradient: buttonColor);
+                            },
+                            listener: (context, state){
+                              if (state is LoginError) {
+                                showAlarmDialog(context, state.message);
+                                context.read<LoginBloc>().add(LoginReInitialized());  
+                              } 
+                              else if(state is LoginSuccess){
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const Bottom_Nav_Bar()),
+                                  (route) => false, // This condition removes all routes from the stack
+                                );
+                              }  
+                            },  
+                          )
                         ],
                       ),
                     ),

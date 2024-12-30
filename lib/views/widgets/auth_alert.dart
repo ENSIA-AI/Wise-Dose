@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void showAlarmDialog(BuildContext context) {
+void showAlarmDialog(BuildContext context, String err) {
     showDialog(
       context: context,
       barrierDismissible: false, // Prevent dismissing by tapping outside
@@ -18,10 +18,10 @@ void showAlarmDialog(BuildContext context) {
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              const Text(
-                'Error details here.',
+              Text(
+                err,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 16),
               ElevatedButton(
