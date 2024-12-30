@@ -171,29 +171,31 @@ class Signup extends StatelessWidget {
                             )),
                           ]),
                           const SizedBox(height: 5),
-                          BlocBuilder<SignupBloc, SignupState>(builder: (context, state){
-                            return (
-                              GradientButton(
-                              onPressed: () {
-                                if (_formGlobalKey.currentState!.validate()) {
-                                  context.read<SignupBloc>().add(SignupSubmitted(userName: _username, password: _password));   
-                                  if (state is SignupError) {
-                                    // Show Alarm for error 
-                                    showAlarmDialog(context);
-                                  } 
-                                  else if(state is SignupSuccess){
-                                    Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => const Bottom_Nav_Bar()),
-                                        (route) => false, // This condition removes all routes from the stack
-                                      );
-                                  }                                              
-                                }
-                              },
-                              text: "Login",
-                              gradient: buttonColor)
-                            );
-                          })   
+                          BlocConsumer<SignupBloc, SignupState>(
+                            builder: (context, state) {
+                              return GradientButton(
+                                  onPressed: () {
+                                    if (_formGlobalKey.currentState!.validate()) {
+                                      context.read<SignupBloc>().add(SignupSubmitted(userName: _username, password: _password, email: _email));                                                                           
+                                    }
+                                  },
+                                  text: "Signup",
+                                  gradient: buttonColor);
+                            },
+                            listener: (context, state){
+                              if (state is SignupError) {
+                                showAlarmDialog(context, state.message);
+                                context.read<SignupBloc>().add(SignupReInitialized());
+                              } 
+                              else if(state is SignupSuccess){
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const Bottom_Nav_Bar()),
+                                  (route) => false, // This condition removes all routes from the stack
+                                );
+                              }  
+                            },  
+                          )
                         ],
                       ),
                     ),

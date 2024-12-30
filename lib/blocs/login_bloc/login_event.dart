@@ -3,13 +3,14 @@ abstract class LoginEvent {}
 
 
 class LoginSubmitted extends LoginEvent {
-  final String userName;
+  final String email;
   final String password;
 
   LoginSubmitted({
-    required this.userName,
+    required this.email,
     required this.password
   });
 }
 
+class LoginReInitialized extends LoginEvent {}
 

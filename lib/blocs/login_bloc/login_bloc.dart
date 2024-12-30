@@ -12,10 +12,20 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           /*
             Supabase Auth Here
           */ 
-          emit(LoginSuccess());
+          if(event.email == 'rayane@gmail.com'){
+            emit(LoginError("Rayane isn't allowed to enter"));
+          } else {
+            emit(LoginSuccess());
+          }
         } catch (e) {
           emit(LoginError(e.toString()));
         }
+      });
+
+
+
+      on<LoginReInitialized>((event, emit) {
+        emit(LoginInitial());
       });
     }
 }
