@@ -6,4 +6,5 @@ class NumberPickerCubit extends Cubit<List<int>> {
   void setMinutes(int minutes) => emit([state[0], minutes]);
 
   void setHours(int hours) => emit([hours, state[1]]);
+
 }

@@ -8,7 +8,10 @@ class MedicationTable extends DBBaseTable {
               medication_name TEXT NOT NULL, 
               start_date TEXT NOT NULL,
               end_date TEXT NOT NULL,
-              frequency TEXT NOT NULL
+              frequency TEXT NOT NULL,
+              details TEXT,
+              hours INTEGER NOT NULL,
+              minutes INTEGER NOT NULL
             )
         ''';
 
