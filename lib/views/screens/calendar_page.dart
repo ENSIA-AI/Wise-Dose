@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
+import 'package:wise_dose/views/screens/medication-info.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
 import 'package:wise_dose/views/widgets/app_bar.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
@@ -19,7 +20,8 @@ class MedicationCalendarPage extends StatelessWidget {
         backgroundColor: Colors.white,
         floatingActionButton: GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, '/medicationInfo');
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MedicationInfo()));
           },
           child: Container(
             width: 50,
