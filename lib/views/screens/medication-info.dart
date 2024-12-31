@@ -9,7 +9,6 @@ import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
 import 'package:wise_dose/views/widgets/DateInputFormatter.dart';
 import 'package:wise_dose/views/widgets/app_bar_arrow_back.dart';
-// import 'package:wise_dose/views/widgets/date_text_field.dart';
 import 'package:wise_dose/views/widgets/gradient_button.dart';
 import 'package:wise_dose/views/widgets/number_picker.dart';
 import 'package:wise_dose/views/widgets/text_field.dart';
@@ -70,7 +69,7 @@ class MedicationInfo extends StatelessWidget {
                                 hint: 'yyyy-mm-dd',
                                 validate: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return "Enter a valid end date.";
+                                    return "Enter a valid start date.";
                                   }
                                   final regex = RegExp(r'^\d{4}-\d{2}-\d{2}$');
                                   if (!regex.hasMatch(value)) {
@@ -164,54 +163,52 @@ class MedicationInfo extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: 15),
-                        Row(
-  children: [
-    Text("Frequency :", style: standardText),
-    SizedBox(width: 12),
-    Container(
-      width: 200, // Adjust width as needed
-      child: DropdownButtonFormField<String>(
-        value: 'Every day', // Initial value, should match one of the items or be null
-        decoration: InputDecoration(
-          labelText: "Select Frequency",
-          labelStyle: TextStyle(color: Colors.grey, fontSize: 12),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: lightBlue, width: 2.0), // Custom border color
-          ),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-        ),
-        items: [
-          DropdownMenuItem(value: 'Every day', child: Text('Every day')),
-          DropdownMenuItem(value: 'Every two days', child: Text('Every two days')),
-          DropdownMenuItem(value: 'Every three days', child: Text('Every three days')),
-          DropdownMenuItem(value: 'Custom', child: Text('Custom')),
-        ],
-        onChanged: (value) {
-          
-            _frequency = value ?? '';
-          
-        },
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return "Please select a frequency.";
-          }
-          return null;
-        },
-        onSaved: (value) {
-          _frequency = value ?? '';
-        },
-        // Adding a custom dropdown style
-        dropdownColor: Colors.white,
-        icon: Icon(Icons.arrow_drop_down, color: lightBlue),
-      ),
-    ),
-  ],
-),
+                            SizedBox(height: 15),
+                              Row(
+                                  children: [
+                                    Text("Frequency :", style: standardText),
+                                    SizedBox(width: 12),
+                                    Container(
+                                      width: 200, // Adjust width as needed
+                                      child: DropdownButtonFormField<String>(
+                                        value: 'Every day', // Initial value, should match one of the items or be null
+                                        decoration: InputDecoration(
+                                          labelText: "Select Frequency",
+                                          labelStyle: TextStyle(color: Colors.grey, fontSize: 12),
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(12),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(12),
+                                            borderSide: BorderSide(color: lightBlue, width: 2.0), // Custom border color
+                                          ),
+                                          contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+                                        ),
+                                        items: [
+                                          DropdownMenuItem(value: 'Every day', child: Text('Every day')),
+                                          DropdownMenuItem(value: 'Every two days', child: Text('Every two days')),
+                                          DropdownMenuItem(value: 'Every three days', child: Text('Every three days')),
+                                          DropdownMenuItem(value: 'Custom', child: Text('Custom')),
+                                        ],
+                                        onChanged: (value) {
+                                            _frequency = value ?? '';
+                                        },
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return "Please select a frequency.";
+                                          }
+                                          return null;
+                                        },
+                                        onSaved: (value) {
+                                          _frequency = value ?? '';
+                                        },
+                                        // Adding a custom dropdown style
+                                        dropdownColor: Colors.white,
+                                        icon: Icon(Icons.arrow_drop_down, color: lightBlue),
+                                      ),
+                                    ),
+                                  ],
+                                ),
 
 
                         SizedBox(height: 5),
@@ -261,9 +258,6 @@ class MedicationInfo extends StatelessWidget {
                              _formGlobalKey.currentState!.save();
                             if (_formGlobalKey.currentState!.validate()) {
                               _formGlobalKey.currentState!.save();
-                              print('----------------');
-                              print(_medName);
-                              print('----------------');
                               context.read<MedicationBloc>().add(AddMedication(
                                   name: _medName,
                                   startDate: _startDate,
