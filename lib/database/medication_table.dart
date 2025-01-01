@@ -21,5 +21,4 @@ class MedicationTable extends DBBaseTable {
     List<Map> obj = await getCompletedRecords();
     return obj;
   }
-
 }
