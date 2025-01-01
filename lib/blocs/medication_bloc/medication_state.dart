@@ -1,3 +1,5 @@
+// ignore_for_file: overridden_fields
+
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:wise_dose/main.dart';

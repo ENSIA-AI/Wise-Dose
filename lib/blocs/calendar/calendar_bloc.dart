@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:intl/intl.dart';
 
 class MedicationCalendarEvent extends Equatable {
   @override
