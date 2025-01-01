@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wise_dose/blocs/medication_bloc/medication_bloc.dart';
 import 'package:wise_dose/blocs/medication_bloc/medication_event.dart';
+import 'package:wise_dose/cubits/number_picker_cubit.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
 import 'package:wise_dose/views/widgets/DateInputFormatter.dart';
@@ -20,6 +21,8 @@ class MedicationInfo extends StatelessWidget {
   String _startDate = '';
   String _endDate = '';
   String _frequency = '';
+  String _details = '';
+
 
   MedicationInfo({super.key});
 
@@ -234,6 +237,7 @@ class MedicationInfo extends StatelessWidget {
                           validator: (value) {
                             return null;
                           },
+                          onSaved: (value) => _details = value ?? '',
                         ),
                         SizedBox(height: 15),
                         /* Row(
@@ -252,22 +256,30 @@ class MedicationInfo extends StatelessWidget {
                                   ],
                                 ), */
                         SizedBox(height: 5),
-                        GradientButton(
-                          onPressed: () {
-                             // Save form data first to update `_startDate`
-                             _formGlobalKey.currentState!.save();
-                            if (_formGlobalKey.currentState!.validate()) {
-                              _formGlobalKey.currentState!.save();
-                              context.read<MedicationBloc>().add(AddMedication(
-                                  name: _medName,
-                                  startDate: _startDate,
-                                  endDate: _endDate,
-                                  frequency: _frequency));
-                            }
-                          },
-                          text: "Add Medication",
-                          gradient: buttonColor,
-                        ),
+                        BlocBuilder<NumberPickerCubit, List<int>>(builder: (context, state) {
+                          return (
+                            GradientButton(
+                              onPressed: () {
+                                // Save form data first to update `_startDate`
+                                _formGlobalKey.currentState!.save();
+                                if (_formGlobalKey.currentState!.validate()) {
+                                  _formGlobalKey.currentState!.save();
+                                  context.read<MedicationBloc>().add(AddMedication(
+                                      name: _medName,
+                                      startDate: _startDate,
+                                      endDate: _endDate,
+                                      frequency: _frequency,
+                                      details: _details,
+                                      time: state
+                                  ));
+                                }
+                              },
+                              text: "Add Medication",
+                              gradient: buttonColor,
+                            )
+                          );
+                        }),
+                        
                         SizedBox(height: 20),
                       ],
                     ),

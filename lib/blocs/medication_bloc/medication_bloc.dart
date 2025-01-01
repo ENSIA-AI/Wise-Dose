@@ -13,7 +13,10 @@ class MedicationBloc extends Bloc<MedicationEvent, MedicationState> {
           'medication_name' : event.name,
           'start_date': event.startDate,
           'end_date': event.endDate,
-          'frequency': event.frequency
+          'frequency': event.frequency,
+          'details' : event.details,
+          'hours' : event.time[0],
+          'minutes' : event.time[1]
         }
       );
       emit(MedicationOnGoingState());
