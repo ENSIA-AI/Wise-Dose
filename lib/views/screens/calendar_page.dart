@@ -50,11 +50,7 @@ class MedicationCalendarPage extends StatelessWidget {
                       child: BlocBuilder<MedicationCalendarBloc,
                           MedicationCalendarState>(
                         builder: (context, state) {
-                          return FutureBuilder<List<Map<dynamic, dynamic>>>(
-                            future: state.dayListMedication, 
-                            builder: (context, snapshot) {
-                              final medEvents = snapshot.data ?? [];
-                              return Column(
+                          return Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               const Padding(
@@ -136,19 +132,41 @@ class MedicationCalendarPage extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              if (medEvents.isNotEmpty)
-                                _buildMedicationInfo(context, "Paracetamol", "12h")
-                                else
-                               Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                                    child: SvgPicture.asset(
-                                    'icons/No_medication.svg', // Path to your SVG file
-                                    height: 200, // Set appropriate size
-                                      ),
-              ),
+                              FutureBuilder<List<Map<dynamic, dynamic>>>(
+                                future: state.dayListMedication,
+                                builder: (context, snapshot){
+                                  if (snapshot.connectionState == ConnectionState.waiting) {
+                                    return const Center(child: CircularProgressIndicator());
+                                  } else if (snapshot.hasError) {
+                                    return Center(child: Text('Error: ${snapshot.error}'));
+                                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                                      child: SvgPicture.asset(
+                                      'icons/No_medication.svg', // Path to your SVG file
+                                      height: 200, // Set appropriate size
+                                        ),);
+                                  } else {
+                                    final medEvents = snapshot.data!;
+                                    return ListView.builder(
+                                          shrinkWrap: true, // Add shrinkWrap to avoid unbounded height error
+                                          physics: const NeverScrollableScrollPhysics(), // Prevent ListView from independently scrolling
+                                        itemCount: medEvents.length,
+                                        itemBuilder: (context, index) {
+                                          return ListTile(
+                                              title: _buildMedicationInfo(
+                                                context, 
+                                                medEvents[index]['medication_name'], 
+                                                medEvents[index]['hours'].toString(),
+                                              ),
+                                            );
+                                        },
+                                      );
+
+                                  }
+                                })
+                                                           
                             ],
-                          );
-                            }
                           );
                         },
                       ),

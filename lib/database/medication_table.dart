@@ -35,13 +35,8 @@ class MedicationTable extends DBBaseTable {
         && DateTime.parse(currentDate).difference(DateTime.parse(record['start_date'])).inDays >= 0){
         if ((DateTime.parse(currentDate).difference(DateTime.parse(record['start_date'])).inDays % int.parse(record['frequency'])) == 0) {
           result.add(record);
-          print('----------------');
-          print('here');
-          print(record);
-          print('----------------');
         }
-      }
-      
+      }      
     }
     return result;
   }
