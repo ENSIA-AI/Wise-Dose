@@ -50,7 +50,11 @@ class MedicationCalendarPage extends StatelessWidget {
                       child: BlocBuilder<MedicationCalendarBloc,
                           MedicationCalendarState>(
                         builder: (context, state) {
-                          return Column(
+                          return FutureBuilder<List<Map<dynamic, dynamic>>>(
+                            future: state.dayListMedication, 
+                            builder: (context, snapshot) {
+                              final medEvents = snapshot.data ?? [];
+                              return Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               const Padding(
@@ -84,14 +88,14 @@ class MedicationCalendarPage extends StatelessWidget {
                                     titleCentered: true,
                                   ),
                                   availableGestures: AvailableGestures.all,
-                                  selectedDayPredicate: (day) =>
-                                      isSameDay(day, state.selectedDay),
-                                  focusedDay: state.selectedDay,
+                                  selectedDayPredicate: (day) => isSameDay(day, DateTime.parse(state.selectedDate)),
+                                  focusedDay: DateTime.parse(state.selectedDate),
                                   firstDay: DateTime.utc(2010, 10, 16),
                                   lastDay: DateTime.utc(2030, 10, 16),
                                   onDaySelected: (selectedDay, _) {
+
                                     context.read<MedicationCalendarBloc>().add(
-                                          SelectDay(selectedDay),
+                                          SelectDay(selectedDate: DateFormat('yyyy-MM-dd').format(selectedDay).toString()),
                                         );
                                   },
                                   calendarStyle: CalendarStyle(
@@ -116,7 +120,7 @@ class MedicationCalendarPage extends StatelessWidget {
                                 children: [
                                   Text(
                                     DateFormat('d MMM yyyy')
-                                        .format(state.selectedDay),
+                                        .format(DateTime.parse(state.selectedDate)),
                                     style: const TextStyle(
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.bold,
@@ -132,8 +136,8 @@ class MedicationCalendarPage extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              if (state.showCard)
-                                _buildMedicationInfo(context, state)
+                              if (medEvents.isNotEmpty)
+                                _buildMedicationInfo(context, "Paracetamol", "12h")
                                 else
                                Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -143,6 +147,8 @@ class MedicationCalendarPage extends StatelessWidget {
                                       ),
               ),
                             ],
+                          );
+                            }
                           );
                         },
                       ),
@@ -157,8 +163,7 @@ class MedicationCalendarPage extends StatelessWidget {
     );
   }
 
-  Widget _buildMedicationInfo(
-      BuildContext context, MedicationCalendarState state) {
+  Widget _buildMedicationInfo( BuildContext context, String name, String time) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 30.0),
       child: Container(
@@ -182,33 +187,33 @@ class MedicationCalendarPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.calendar_month_outlined,
                           size: 30,
                           color: Color(0xff214353),
                         ),
-                        SizedBox(width: 8.0),
+                        const SizedBox(width: 8.0),
                         Text(
-                          'For Me: Paracetamol',
+                          name,
                           style: boldStandardText,
                         ),
                       ],
                     ),
-                    SizedBox(height: 8.0),
+                    const SizedBox(height: 8.0),
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.access_time_outlined,
                           color: Color(0xff214353),
                         ),
-                        SizedBox(width: 8.0),
+                        const SizedBox(width: 8.0),
                         Text(
-                          '13:30',
+                          time,
                           style: titleText,
                         ),
                       ],
@@ -218,7 +223,7 @@ class MedicationCalendarPage extends StatelessWidget {
                 Transform.scale(
                   scale: 1.5,
                   child: Checkbox(
-                    value: state.isChecked,
+                    value: false,
                     onChanged: (bool? value) {
                       context
                           .read<MedicationCalendarBloc>()
@@ -236,3 +241,6 @@ class MedicationCalendarPage extends StatelessWidget {
     );
   }
 }
+
+
+/*  */

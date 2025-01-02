@@ -1,28 +1,29 @@
+import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
+import 'package:wise_dose/main.dart';
+
+
 
 class MedicationCalendarState extends Equatable {
-  final DateTime selectedDay;
-  final bool showCard;
-  final bool isChecked;
+ late final Future<List<Map<dynamic, dynamic>>> dayListMedication;
+  late String selectedDate;
 
-  const MedicationCalendarState({
-    required this.selectedDay,
-    required this.showCard,
-    required this.isChecked,
-  });
 
-  MedicationCalendarState copyWith({
-    DateTime? selectedDay,
-    bool? showCard,
-    bool? isChecked,
-  }) {
-    return MedicationCalendarState(
-      selectedDay: selectedDay ?? this.selectedDay,
-      showCard: showCard ?? this.showCard,
-      isChecked: isChecked ?? this.isChecked,
-    );
-  }
+    @override
+  List<Object?> get props => [const DeepCollectionEquality().hash(dayListMedication)];
 
-  @override
-  List<Object?> get props => [selectedDay, showCard, isChecked];
 }
+
+
+class MedicationDay extends MedicationCalendarState {
+
+  MedicationDay(String selected) {
+    selectedDate = selected;
+    dayListMedication = MedDB.getDayMedications(selectedDate);
+  }
+}
+
+
+class MedicationTaken extends MedicationCalendarState{}
+
+class MedicationNotTaken extends MedicationCalendarState{}

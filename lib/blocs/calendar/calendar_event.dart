@@ -1,24 +1,20 @@
-import 'package:equatable/equatable.dart';
 
-class MedicationCalendarEvent extends Equatable {
-  @override
-  List<Object?> get props => [];
-}
+class MedicationCalendarEvent  {}
+
 
 class SelectDay extends MedicationCalendarEvent {
-  final DateTime selectedDay;
+  final String selectedDate;
 
-  SelectDay(this.selectedDay);
+  SelectDay({required this.selectedDate});
 
-  @override
-  List<Object?> get props => [selectedDay];
 }
 
+
+//Toggle check box will need a second attribute selected medication to specify the changed
+//medication in the list
 class ToggleCheckbox extends MedicationCalendarEvent {
   final bool isChecked;
 
   ToggleCheckbox(this.isChecked);
 
-  @override
-  List<Object?> get props => [isChecked];
 }
