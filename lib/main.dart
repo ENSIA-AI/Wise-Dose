@@ -8,6 +8,7 @@ import 'package:wise_dose/blocs/medication_bloc/medication_bloc.dart';
 import 'package:wise_dose/blocs/signup_bloc/signup_bloc.dart';
 import 'package:wise_dose/cubits/number_picker_cubit.dart';
 import 'package:wise_dose/cubits/remember_pwd_cubit.dart';
+import 'package:wise_dose/database/medication_event_table.dart';
 import 'package:wise_dose/database/medication_table.dart';
 import 'package:wise_dose/views/screens/calendar_page.dart';
 import 'package:wise_dose/views/screens/history.dart';
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: History(),
+        home: Bottom_Nav_Bar(),
         debugShowCheckedModeBanner: false,
       ),
     );
