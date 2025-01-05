@@ -7,11 +7,6 @@ import 'package:wise_dose/cubits/number_picker_cubit.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
 
 
-
-
-
-
-
 class NumberPage extends StatelessWidget {
   const NumberPage({super.key});
 

@@ -19,9 +19,6 @@ class MedicationBloc extends Bloc<MedicationEvent, MedicationState> {
           'minutes' : event.time[1]
         }
       );
-      /* MedEventTable.insertRecord({
-
-      }); */
       emit(MedicationOnGoingState());
     },);
 
