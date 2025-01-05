@@ -84,6 +84,7 @@ class MedicationInfo extends StatelessWidget {
                                     final month = int.parse(parts[1]);
                                     final day = int.parse(parts[2]);
                                      final parsedDate = DateTime(year, month, day);
+                                    
                                     if (parsedDate.year != year || parsedDate.month != month || parsedDate.day != day) {
                                          return 'Enter a valid calendar date.';
                                         } // Validates the actual date
