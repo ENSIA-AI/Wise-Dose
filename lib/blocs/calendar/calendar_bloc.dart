@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:wise_dose/blocs/calendar/calendar_event.dart';
 import 'package:wise_dose/blocs/calendar/calendar_state.dart';
 import 'package:intl/intl.dart';
