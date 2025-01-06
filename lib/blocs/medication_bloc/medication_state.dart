@@ -31,6 +31,4 @@ class MedicationCompletedState extends MedicationState {
 
   MedicationCompletedState();
 
-
-
 }

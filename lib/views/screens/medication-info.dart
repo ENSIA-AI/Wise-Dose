@@ -84,6 +84,7 @@ class MedicationInfo extends StatelessWidget {
                                     final month = int.parse(parts[1]);
                                     final day = int.parse(parts[2]);
                                      final parsedDate = DateTime(year, month, day);
+                                    
                                     if (parsedDate.year != year || parsedDate.month != month || parsedDate.day != day) {
                                          return 'Enter a valid calendar date.';
                                         } // Validates the actual date
@@ -174,7 +175,7 @@ class MedicationInfo extends StatelessWidget {
                                     Container(
                                       width: 200, // Adjust width as needed
                                       child: DropdownButtonFormField<String>(
-                                        value: 'Every day', // Initial value, should match one of the items or be null
+                                        value: '1', // Initial value, should match one of the items or be null
                                         decoration: InputDecoration(
                                           labelText: "Select Frequency",
                                           labelStyle: TextStyle(color: Colors.grey, fontSize: 12),
@@ -188,9 +189,9 @@ class MedicationInfo extends StatelessWidget {
                                           contentPadding: const EdgeInsets.symmetric(horizontal: 12),
                                         ),
                                         items: [
-                                          DropdownMenuItem(value: 'Every day', child: Text('Every day')),
-                                          DropdownMenuItem(value: 'Every two days', child: Text('Every two days')),
-                                          DropdownMenuItem(value: 'Every three days', child: Text('Every three days')),
+                                          DropdownMenuItem(value: '1', child: Text('Every day')),
+                                          DropdownMenuItem(value: '2', child: Text('Every two days')),
+                                          DropdownMenuItem(value: '3', child: Text('Every three days')),
                                           DropdownMenuItem(value: 'Custom', child: Text('Custom')),
                                         ],
                                         onChanged: (value) {

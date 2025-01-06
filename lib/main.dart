@@ -9,12 +9,14 @@ import 'package:wise_dose/blocs/medication_bloc/medication_bloc.dart';
 import 'package:wise_dose/blocs/signup_bloc/signup_bloc.dart';
 import 'package:wise_dose/cubits/number_picker_cubit.dart';
 import 'package:wise_dose/cubits/remember_pwd_cubit.dart';
+import 'package:wise_dose/database/medication_event_table.dart';
 import 'package:wise_dose/database/medication_table.dart';
 import 'package:wise_dose/views/screens/calendar_page.dart';
 import 'package:wise_dose/views/screens/history.dart';
 import 'package:wise_dose/views/screens/login.dart';
 import 'package:wise_dose/views/screens/medication-info.dart';
 import 'package:wise_dose/views/screens/onboarding.dart';
+import 'package:wise_dose/views/screens/scanner.dart';
 import 'package:wise_dose/views/screens/signup.dart';
 import 'package:wise_dose/views/widgets/bottom_bar.dart';
 import 'package:wise_dose/views/widgets/number_picker.dart';
@@ -56,7 +58,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: Onboarding(),
+        home: Bottom_Nav_Bar(),
         debugShowCheckedModeBanner: false,
       ),
     );

@@ -21,16 +21,6 @@ class MedicationBloc extends Bloc<MedicationEvent, MedicationState> {
           'minutes' : event.time[1]
         }
       );
-              print("----------------");
-                print('Medication Name: ${event.name}');
-                print('Start Date: ${event.startDate}');
-                print('End Date: ${event.endDate}');
-                print('Frequency: ${event.frequency}');
-                print('Details: ${event.details}');
-                print('Hours: ${event.time[0]}');
-                print('Minutes: ${event.time[1]}');
-              print("----------------");
-
       emit(MedicationOnGoingState());
     },);
 

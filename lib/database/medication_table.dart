@@ -27,4 +27,19 @@ class MedicationTable extends DBBaseTable {
     return obj;
   }
 
+
+  Future<List<Map>> getDayMedications(String currentDate) async {
+    List<Map> obj = await getOnGoingRecords();
+    List<Map> result = [];
+
+    for (var record in obj) {
+      if(DateTime.parse(record['end_date']).difference(DateTime.parse(currentDate)).inDays >= 0 
+        && DateTime.parse(currentDate).difference(DateTime.parse(record['start_date'])).inDays >= 0){
+        if ((DateTime.parse(currentDate).difference(DateTime.parse(record['start_date'])).inDays % int.parse(record['frequency'])) == 0) {
+          result.add(record);
+        }
+      }      
+    }
+    return result;
+  }
 }
