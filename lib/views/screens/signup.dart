@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, prefer_const_constructors
+// ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,16 +6,13 @@ import 'package:wise_dose/blocs/signup_bloc/signup_bloc.dart';
 import 'package:wise_dose/blocs/signup_bloc/signup_event.dart';
 import 'package:wise_dose/blocs/signup_bloc/signup_state.dart';
 import 'package:wise_dose/cubits/remember_pwd_cubit.dart';
-import 'package:wise_dose/views/screens/calendar_page.dart';
 import 'package:wise_dose/views/screens/login.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
 import 'package:wise_dose/views/widgets/alternative_login.dart';
 import 'package:wise_dose/views/widgets/auth_alert.dart';
-import 'package:wise_dose/views/widgets/bottom_bar.dart';
 import 'package:wise_dose/views/widgets/gradient_button.dart';
 import 'package:wise_dose/views/widgets/text_field.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class Signup extends StatelessWidget {
   final _formGlobalKey = GlobalKey<FormState>();

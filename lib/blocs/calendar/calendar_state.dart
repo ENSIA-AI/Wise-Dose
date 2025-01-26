@@ -1,7 +1,8 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:wise_dose/main.dart';
-
 
 
 class MedicationCalendarState extends Equatable {
@@ -9,7 +10,7 @@ class MedicationCalendarState extends Equatable {
   late String selectedDate;
 
 
-    @override
+  @override
   List<Object?> get props => [const DeepCollectionEquality().hash(dayListMedication)];
 
 }
