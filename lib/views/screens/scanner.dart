@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:wise_dose/views/screens/mobile_scanner.dart';
+import 'package:wise_dose/views/widgets/mobile_scanner.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
 import 'package:wise_dose/views/widgets/app_bar.dart';
@@ -22,7 +22,7 @@ class _ScannerState extends State<Scanner> {
   };
 
   void _handleScannedCode(String result) {
-    // Show side effects dialog after scanning
+    
     _showSideEffects(result);
     print("barcode ===== $result");
   }

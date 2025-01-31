@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, unused_import
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,20 +17,29 @@ import 'package:wise_dose/views/screens/scanner.dart';
 import 'package:wise_dose/views/screens/signup.dart';
 import 'package:wise_dose/views/widgets/bottom_bar.dart';
 import 'package:wise_dose/views/widgets/number_picker.dart';
-
+import 'package:wise_dose/database/chat_repository.dart';
+import 'package:wise_dose/views/screens/chat_screen.dart';
 
 final MedDB = MedicationTable();
 
-void main(){
-  runApp(MyApp());
+void main() {
+  const apiKey = 'AIzaSyBUjgb0puQXr3n2eCS0La-q_MO5y-DgLew'; // Replace with your actual API key
+
+  runApp(
+    RepositoryProvider(
+      create: (context) => ChatRepository(apiKey: apiKey),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [ 
+      providers: [
         BlocProvider(create: (_) => MedicationBloc()),
         BlocProvider(create: (_) => RememberPwdCubit()),
         BlocProvider(create: (_) => LoginBloc()),
@@ -40,15 +47,16 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => NumberPickerCubit()),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Wise Dose',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: Bottom_Nav_Bar(),
+        home: Bottom_Nav_Bar(), // Directly open chat screen on launch
         debugShowCheckedModeBanner: false,
+         
+        
       ),
     );
   }
 }
-
