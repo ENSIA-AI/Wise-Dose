@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names
 
+import "package:intl/intl.dart";
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wise_dose/blocs/medication_bloc/medication_bloc.dart';
@@ -29,8 +30,8 @@ class History extends StatelessWidget {
         backgroundColor: Colors.white,
         floatingActionButton: GestureDetector(
           onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => MedicationInfo()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => MedicationInfo()));
           },
           child: Container(
             width: 50,
@@ -58,7 +59,9 @@ class History extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           context.read<HistoryBloc>().toggleSelection();
-                          context.read<MedicationBloc>().add(OnGoingMedication());
+                          context
+                              .read<MedicationBloc>()
+                              .add(OnGoingMedication());
                         },
                         child: Text(
                           'On-going',
@@ -70,7 +73,9 @@ class History extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           context.read<HistoryBloc>().toggleSelection();
-                          context.read<MedicationBloc>().add(CompletedMedication());
+                          context
+                              .read<MedicationBloc>()
+                              .add(CompletedMedication());
                         },
                         child: Text(
                           'Completed',
@@ -87,34 +92,60 @@ class History extends StatelessWidget {
             const SizedBox(height: 20),
             Expanded(
               child: Expanded(
-                  child: BlocBuilder<MedicationBloc, MedicationState>(
-                    builder: (context, medState) {
-                      return FutureBuilder<List<Map<dynamic, dynamic>>>(
-                        future: medState.myList,
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState == ConnectionState.waiting) {
-                            return const Center(child: CircularProgressIndicator());
-                          } else if (snapshot.hasError) {
-                            return Center(child: Text('Error: ${snapshot.error}'));
-                          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                            return const Center(child: Text('No medications found'));
-                          } else {
-                            final medications = snapshot.data!;
-                            return ListView.builder(
-                              itemCount: medications.length,
-                              itemBuilder: (context, index) {
-                                return ListTile(
-                                  title: ReminderContainer(name: medications[index]['medication_name'], startDate: medications[index]['start_date'], 
-                                    endDate: medications[index]['end_date'], frequency: medications[index]['frequency'],),
-                                );
-                              },
-                            );
-                          }
-                        },
-                      );
-                    },
-                  ),
+                child: BlocBuilder<MedicationBloc, MedicationState>(
+                  builder: (context, medState) {
+                    return FutureBuilder<List<Map<dynamic, dynamic>>>(
+                      future: medState.myList,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        } else if (snapshot.hasError) {
+                          return Center(
+                              child: Text('Error: ${snapshot.error}'));
+                        } else if (!snapshot.hasData ||
+                            snapshot.data!.isEmpty) {
+                          return const Center(
+                              child: Text('No medications found'));
+                        } else {
+                          final medications = snapshot.data!;
+                          return ListView.builder(
+                            itemCount: medications.length,
+                            itemBuilder: (context, index) {
+                              String freq;
+                              if (medications[index]['frequency'] == '1') {
+                                freq = "Every day";
+                              } else if (medications[index]['frequency'] ==
+                                  '2') {
+                                freq = "Every 2 days";
+                              } else if (medications[index]['frequency'] ==
+                                  '3') {
+                                // ignore: prefer_interpolation_to_compose_strings
+                                freq = "Every 3 days";
+                              } else {
+                                freq = "Custom";
+                              }
+                              return ListTile(
+                                title: ReminderContainer(
+                                  name: medications[index]['medication_name'],
+                                  startDate: DateFormat('yyyy-MM-dd').format(
+                                      DateTime.parse(
+                                          medications[index]['start_date'])),
+                                  endDate: DateFormat('yyyy-MM-dd').format(
+                                      DateTime.parse(
+                                          medications[index]['end_date'])),
+                                  frequency: freq,
+                                ),
+                              );
+                            },
+                          );
+                        }
+                      },
+                    );
+                  },
                 ),
+              ),
             ),
           ],
         ),
@@ -122,4 +153,3 @@ class History extends StatelessWidget {
     );
   }
 }
-

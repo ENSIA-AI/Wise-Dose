@@ -1,21 +1,28 @@
+import 'dart:convert';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:wise_dose/blocs/signup_bloc/signup_event.dart';
 import 'package:wise_dose/blocs/signup_bloc/signup_state.dart';
+import 'package:http/http.dart' as http;
+import 'package:wise_dose/database/userId.dart';
 
 class SignupBloc extends Bloc<SignupEvent, SignupState> {
   SignupBloc() : super(SignupInitial()) {
     on<SignupSubmitted>((event, emit) async {
       emit(SignupLoading());
       try {
-        await Supabase.instance.client.auth.signUp(
-          email: event.email,
-          password: event.password,
-          data: {'username': event.userName}
-        );
+        final url = Uri.parse('https://wise-dose-backend-f83x.vercel.app/signup');
+
+        await http.post(url,
+            headers: {'Content-Type': 'application/json'},
+            body: jsonEncode({
+              'username': event.userName,
+              'email': event.email,
+              'password': event.password
+            }));
 
         emit(SignupSuccess());
-        
       } catch (e) {
         emit(SignupError(e.toString()));
       }

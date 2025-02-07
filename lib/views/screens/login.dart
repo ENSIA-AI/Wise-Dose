@@ -12,6 +12,7 @@ import 'package:wise_dose/views/widgets/auth_alert.dart';
 import 'package:wise_dose/views/widgets/bottom_bar.dart';
 import 'package:wise_dose/views/widgets/gradient_button.dart';
 import 'package:wise_dose/views/widgets/text_field.dart';
+import 'package:restart_app/restart_app.dart';
 
 class Login extends StatelessWidget {
   final _formGlobalKey = GlobalKey<FormState>();
@@ -178,6 +179,7 @@ class Login extends StatelessWidget {
                                       (route) =>
                                           false, // This condition removes all routes from the stack
                                     );
+                                    //Restart.restartApp();
                                   }
                                 },
                               )

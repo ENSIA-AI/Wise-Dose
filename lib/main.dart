@@ -1,47 +1,55 @@
-// ignore_for_file: prefer_const_constructors, unused_import
+// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:wise_dose/blocs/login_bloc/login_bloc.dart';
 import 'package:wise_dose/blocs/medication_bloc/medication_bloc.dart';
 import 'package:wise_dose/blocs/signup_bloc/signup_bloc.dart';
 import 'package:wise_dose/cubits/number_picker_cubit.dart';
 import 'package:wise_dose/cubits/remember_pwd_cubit.dart';
-import 'package:wise_dose/database/medication_event_table.dart';
 import 'package:wise_dose/database/medication_table.dart';
-import 'package:wise_dose/views/screens/calendar_page.dart';
-import 'package:wise_dose/views/screens/history.dart';
-import 'package:wise_dose/views/screens/login.dart';
-import 'package:wise_dose/views/screens/medication-info.dart';
+import 'package:wise_dose/database/sync_services.dart';
+import 'package:wise_dose/database/userId.dart';
 import 'package:wise_dose/views/screens/onboarding.dart';
-import 'package:wise_dose/views/screens/scanner.dart';
-import 'package:wise_dose/views/screens/signup.dart';
 import 'package:wise_dose/views/widgets/bottom_bar.dart';
-import 'package:wise_dose/views/widgets/number_picker.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 final MedDB = MedicationTable();
+late bool newCon;
 
 void main() async {
-  print("loading dotenv ...");
-  //await dotenv.load(fileName: ".env");
-  print("dotenv loaded!");
-  print("initializing supabase ...");
-  // await Supabase.initialize(
-  //     url: dotenv.env['SUPABASE_URL']!,
-  //     anonKey: dotenv.env['SUPABASE_ANON_KEY']!);
+  WidgetsFlutterBinding.ensureInitialized();
+  bool? newConnection = await getNewConnection();
 
-  await Supabase.initialize(
-      url: dotenv.env['SUPABASE_URL']!,
-      anonKey: dotenv.env['SUPABASE_ANON_KEY']!);
-  print("initialized!!");
-  runApp(MyApp());
+  if (newConnection == null) {
+    markNewConnection(true);
+  } else {
+    markNewConnection(false);
+  }
+
+  newCon = newConnection!;
+
+  try {
+    print("loading dotenv ...");
+    await dotenv.load(fileName: ".env");
+    print("dotenv loaded!");
+    print("initializing supabase ...");
+    await Supabase.initialize(
+        url: dotenv.env['SUPABASE_URL']!,
+        anonKey: dotenv.env['SUPABASE_ANON_KEY']!);
+
+    SyncManager().monitorConnectivity();
+  } catch (e) {
+    throw Exception('Error initialzing app: $e');
+  }
+  runApp(MyApp(newConnection: newCon,));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool newConnection;
+  const MyApp({super.key, required this.newConnection});
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -53,12 +61,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => NumberPickerCubit()),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: Bottom_Nav_Bar(),
+        home: newCon ? Onboarding() : Bottom_Nav_Bar(),
         debugShowCheckedModeBanner: false,
       ),
     );

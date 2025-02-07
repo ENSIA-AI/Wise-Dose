@@ -34,6 +34,9 @@ dependencies:
   flutter_bloc: ^8.1.2
   supabase_flutter: ^2.0.0
   flutter_dotenv: ^5.0.2
+  http: ^1.1.0
+  intl: ^0.19.0
+  restart_app: ^1.3.2
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -108,6 +111,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - .env
 
 
 

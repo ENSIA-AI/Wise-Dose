@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, prefer_const_constructors_in_immutables, use_key_in_widget_constructors, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:wise_dose/database/logout.dart';
 import 'package:wise_dose/views/screens/login.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/themes/style_simple/styles.dart';
@@ -151,12 +152,13 @@ class _SettingsState extends State<Settings> {
               GestureDetector(
                 onTap: () {
                   Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => Login()));
-                  },
+                      MaterialPageRoute(builder: (context) => Login()));
+                },
                 child: AccountOptionRow(
                   icon: Icons.logout,
                   title: 'Log out',
-                  onTap: () {
+                  onTap: () async {
+                    logoutUser();
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => Login()));
                   },
