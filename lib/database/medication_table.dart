@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, overridden_fields, annotate_overrides, avoid_print
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:wise_dose/database/userId.dart';

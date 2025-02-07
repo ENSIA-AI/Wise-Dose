@@ -14,6 +14,7 @@ import 'package:wise_dose/views/widgets/gradient_button.dart';
 import 'package:wise_dose/views/widgets/number_picker.dart';
 import 'package:wise_dose/views/widgets/text_field.dart';
 
+// ignore: must_be_immutable
 class MedicationInfo extends StatelessWidget {
   final _formGlobalKey = GlobalKey<FormState>();
 
@@ -89,7 +90,7 @@ class MedicationInfo extends StatelessWidget {
                                          return 'Enter a valid calendar date.';
                                         } // Validates the actual date
                                          if ( _endDate.isNotEmpty) {
-                                                final endParts = _endDate!.split('-');
+                                                final endParts = _endDate.split('-');
                                                 final endYear = int.parse(endParts[0]);
                                                 final endMonth = int.parse(endParts[1]);
                                                 final endDay = int.parse(endParts[2]);
@@ -140,7 +141,7 @@ class MedicationInfo extends StatelessWidget {
                                        return 'Enter a valid calendar date.';
                                         } // Validates the actual date
                                          if ( _startDate.isNotEmpty) {
-                                                final startParts = _startDate!.split('-');
+                                                final startParts = _startDate.split('-');
                                                 final startYear = int.parse(startParts[0]);
                                                 final startMonth = int.parse(startParts[1]);
                                                 final startDay = int.parse(startParts[2]);

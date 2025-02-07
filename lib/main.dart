@@ -1,12 +1,13 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wise_dose/blocs/login_bloc/login_bloc.dart';
 import 'package:wise_dose/blocs/medication_bloc/medication_bloc.dart';
 import 'package:wise_dose/blocs/signup_bloc/signup_bloc.dart';
-import 'package:wise_dose/blocs/chat_bloc/chat_bloc.dart';
+import 'package:wise_dose/blocs/chatbot/chat_bloc.dart';
 import 'package:wise_dose/cubits/number_picker_cubit.dart';
 import 'package:wise_dose/cubits/remember_pwd_cubit.dart';
 import 'package:wise_dose/database/medication_table.dart';
@@ -14,9 +15,7 @@ import 'package:wise_dose/database/sync_services.dart';
 import 'package:wise_dose/database/userId.dart';
 import 'package:wise_dose/views/screens/onboarding.dart';
 import 'package:wise_dose/views/widgets/bottom_bar.dart';
-import 'package:wise_dose/views/widgets/number_picker.dart';
 import 'package:wise_dose/database/chat_repository.dart';
-import 'package:wise_dose/views/screens/chat_screen.dart';
 
 final MedDB = MedicationTable();
 late bool newCon;
@@ -37,7 +36,6 @@ void main() async {
     print("loading dotenv ...");
     await dotenv.load(fileName: ".env");
     print("dotenv loaded!");
-    const apiKey = dotenv.env['GEMINI_KEY']!;
     print("initializing supabase ...");
     await Supabase.initialize(
         url: dotenv.env['SUPABASE_URL']!,

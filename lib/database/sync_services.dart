@@ -1,3 +1,5 @@
+// ignore_for_file: unrelated_type_equality_checks, avoid_print
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wise_dose/main.dart';

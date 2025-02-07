@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wise_dose/views/screens/calendar_page.dart';
 import 'package:wise_dose/views/screens/chat_screen.dart';
 import 'package:wise_dose/views/screens/history.dart';
-import 'package:wise_dose/views/screens/scanner.dart';
 import 'package:wise_dose/views/screens/settings.dart';
 import 'package:wise_dose/views/themes/style_simple/colors.dart';
 import 'package:wise_dose/views/widgets/under_development.dart';

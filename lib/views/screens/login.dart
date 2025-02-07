@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wise_dose/blocs/login_bloc/login_bloc.dart';
@@ -12,7 +14,7 @@ import 'package:wise_dose/views/widgets/auth_alert.dart';
 import 'package:wise_dose/views/widgets/bottom_bar.dart';
 import 'package:wise_dose/views/widgets/gradient_button.dart';
 import 'package:wise_dose/views/widgets/text_field.dart';
-import 'package:restart_app/restart_app.dart';
+//import 'package:restart_app/restart_app.dart';
 
 class Login extends StatelessWidget {
   final _formGlobalKey = GlobalKey<FormState>();

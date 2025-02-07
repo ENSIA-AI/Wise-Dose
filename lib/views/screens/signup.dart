@@ -187,7 +187,7 @@ class Signup extends StatelessWidget {
                               else if(state is SignupSuccess){
                                 Navigator.pushAndRemoveUntil(
                                   context,
-                                  MaterialPageRoute(builder: (context) => const Bottom_Nav_Bar()),
+                                  MaterialPageRoute(builder: (context) => Login()),
                                   (route) => false, // This condition removes all routes from the stack
                                 );
                               }  
