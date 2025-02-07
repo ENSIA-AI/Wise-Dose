@@ -67,7 +67,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => LoginBloc()),
         BlocProvider(create: (_) => SignupBloc()),
         BlocProvider(create: (_) => NumberPickerCubit()),
-        BlocProvider(create: (context) => ChatBloc(RepositoryProvider.of<ChatRepository>(context))),
+        BlocProvider(
+            create: (context) =>
+                ChatBloc(RepositoryProvider.of<ChatRepository>(context))),
       ],
       child: MaterialApp(
         title: 'Wise Dose',
