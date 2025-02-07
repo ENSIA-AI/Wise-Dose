@@ -1,5 +1,3 @@
-// ignore_for_file: constant_identifier_names, prefer_typing_uninitialized_variables, non_constant_identifier_names, avoid_function_literals_in_foreach_calls
-
 import 'dart:async';
 import 'medication_table.dart';
 import 'package:path/path.dart';

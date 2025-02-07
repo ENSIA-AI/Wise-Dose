@@ -1,7 +1,6 @@
-import 'dart:convert';
 
+import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:wise_dose/blocs/signup_bloc/signup_event.dart';
 import 'package:wise_dose/blocs/signup_bloc/signup_state.dart';
 import 'package:http/http.dart' as http;
@@ -28,10 +27,8 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
       }
     });
 
-    on<SignupReInitialized>(
-      (event, emit) {
+      on<SignupReInitialized>((event, emit) {
         emit(SignupInitial());
-      },
-    );
-  }
+      },);
+    }
 }

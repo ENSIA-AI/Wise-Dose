@@ -1,5 +1,3 @@
-// ignore_for_file: non_constant_identifier_names, avoid_print
-
 import 'package:sqflite/sqflite.dart';
 
 import 'dbhelper.dart';

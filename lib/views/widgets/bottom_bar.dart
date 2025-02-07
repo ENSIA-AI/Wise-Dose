@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wise_dose/views/screens/calendar_page.dart';
+import 'package:wise_dose/views/screens/chat_screen.dart';
 import 'package:wise_dose/views/screens/history.dart';
 import 'package:wise_dose/views/screens/scanner.dart';
 import 'package:wise_dose/views/screens/settings.dart';
@@ -17,7 +18,7 @@ class _Bottom_Nav_BarState extends State<Bottom_Nav_Bar> {
   int _selectedIndex = 2;
 
   final List<Widget> _pages = [
-    Scanner(),
+    ChatScreen(),
     History(),
     MedicationCalendarPage(),
     UnderDevelopment(),
