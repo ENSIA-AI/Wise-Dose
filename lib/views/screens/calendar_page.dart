@@ -22,8 +22,8 @@ class MedicationCalendarPage extends StatelessWidget {
         backgroundColor: Colors.white,
         floatingActionButton: GestureDetector(
           onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => MedicationInfo()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => MedicationInfo()));
           },
           child: Container(
             width: 50,
@@ -84,14 +84,19 @@ class MedicationCalendarPage extends StatelessWidget {
                                     titleCentered: true,
                                   ),
                                   availableGestures: AvailableGestures.all,
-                                  selectedDayPredicate: (day) => isSameDay(day, DateTime.parse(state.selectedDate)),
-                                  focusedDay: DateTime.parse(state.selectedDate),
+                                  selectedDayPredicate: (day) => isSameDay(
+                                      day, DateTime.parse(state.selectedDate)),
+                                  focusedDay:
+                                      DateTime.parse(state.selectedDate),
                                   firstDay: DateTime.utc(2010, 10, 16),
                                   lastDay: DateTime.utc(2030, 10, 16),
                                   onDaySelected: (selectedDay, _) {
-
                                     context.read<MedicationCalendarBloc>().add(
-                                          SelectDay(selectedDate: DateFormat('yyyy-MM-dd').format(selectedDay).toString()),
+                                          SelectDay(
+                                              selectedDate:
+                                                  DateFormat('yyyy-MM-dd')
+                                                      .format(selectedDay)
+                                                      .toString()),
                                         );
                                   },
                                   calendarStyle: CalendarStyle(
@@ -115,8 +120,8 @@ class MedicationCalendarPage extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    DateFormat('d MMM yyyy')
-                                        .format(DateTime.parse(state.selectedDate)),
+                                    DateFormat('d MMM yyyy').format(
+                                        DateTime.parse(state.selectedDate)),
                                     style: const TextStyle(
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.bold,
@@ -133,39 +138,47 @@ class MedicationCalendarPage extends StatelessWidget {
                                 ],
                               ),
                               FutureBuilder<List<Map<dynamic, dynamic>>>(
-                                future: state.dayListMedication,
-                                builder: (context, snapshot){
-                                  if (snapshot.connectionState == ConnectionState.waiting) {
-                                    return const Center(child: CircularProgressIndicator());
-                                  } else if (snapshot.hasError) {
-                                    return Center(child: Text('Error: ${snapshot.error}'));
-                                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                                    return Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                                      child: SvgPicture.asset(
-                                      'icons/No_medication.svg', // Path to your SVG file
-                                      height: 200, // Set appropriate size
-                                        ),);
-                                  } else {
-                                    final medEvents = snapshot.data!;
-                                    return ListView.builder(
-                                          shrinkWrap: true, // Add shrinkWrap to avoid unbounded height error
-                                          physics: const NeverScrollableScrollPhysics(), // Prevent ListView from independently scrolling
+                                  future: state.dayListMedication,
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return const Center(
+                                          child: CircularProgressIndicator());
+                                    } else if (snapshot.hasError) {
+                                      return Center(
+                                          child:
+                                              Text('Error: ${snapshot.error}'));
+                                    } else if (!snapshot.hasData ||
+                                        snapshot.data!.isEmpty) {
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20.0),
+                                        child: SvgPicture.asset(
+                                          'icons/No_medication.svg', // Path to your SVG file
+                                          height: 200, // Set appropriate size
+                                        ),
+                                      );
+                                    } else {
+                                      final medEvents = snapshot.data!;
+                                      return ListView.builder(
+                                        shrinkWrap:
+                                            true, // Add shrinkWrap to avoid unbounded height error
+                                        physics:
+                                            const NeverScrollableScrollPhysics(), // Prevent ListView from independently scrolling
                                         itemCount: medEvents.length,
                                         itemBuilder: (context, index) {
                                           return ListTile(
-                                              title: _buildMedicationInfo(
-                                                context, 
-                                                medEvents[index]['medication_name'], 
-                                                medEvents[index]['hours'].toString(),
-                                              ),
-                                            );
+                                            title: _buildMedicationInfo(
+                                              context,
+                                              medEvents[index]
+                                                  ['medication_name'],
+                                              DateFormat('HH:mm').format(DateTime(0, 0, 1, medEvents[index]['hours'], medEvents[index]['minutes']),)
+                                            ),
+                                          );
                                         },
                                       );
-
-                                  }
-                                })
-                                                           
+                                    }
+                                  })
                             ],
                           );
                         },
@@ -181,7 +194,7 @@ class MedicationCalendarPage extends StatelessWidget {
     );
   }
 
-  Widget _buildMedicationInfo( BuildContext context, String name, String time) {
+  Widget _buildMedicationInfo(BuildContext context, String name, String time) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 30.0),
       child: Container(

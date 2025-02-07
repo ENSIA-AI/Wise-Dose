@@ -1,4 +1,3 @@
-
 class MedicationCalendarEvent  {}
 
 
@@ -6,7 +5,6 @@ class SelectDay extends MedicationCalendarEvent {
   final String selectedDate;
 
   SelectDay({required this.selectedDate});
-
 }
 
 
@@ -16,5 +14,4 @@ class ToggleCheckbox extends MedicationCalendarEvent {
   final bool isChecked;
 
   ToggleCheckbox(this.isChecked);
-
 }

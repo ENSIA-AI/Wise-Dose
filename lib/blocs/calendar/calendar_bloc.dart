@@ -4,8 +4,6 @@ import 'package:wise_dose/blocs/calendar/calendar_state.dart';
 import 'package:intl/intl.dart';
 
 
-
-
 class MedicationCalendarBloc extends Bloc<MedicationCalendarEvent, MedicationCalendarState> {
   MedicationCalendarBloc() : super(MedicationDay(DateFormat('yyyy-MM-dd').format(DateTime.now()))) {
     on<SelectDay>((event, emit) {
@@ -17,4 +15,3 @@ class MedicationCalendarBloc extends Bloc<MedicationCalendarEvent, MedicationCal
     });
   }
 }
-
