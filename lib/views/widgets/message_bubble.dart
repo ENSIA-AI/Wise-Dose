@@ -19,7 +19,7 @@ class MessageBubble extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           color: message.isUser 
-              ? const  Color.fromRGBO(33, 67, 83, 1) 
+              ? const Color.fromRGBO(33, 67, 83, 1) 
               : const Color(0xFFF5F5F5),
           borderRadius: BorderRadius.only(
             topLeft: const Radius.circular(20),
@@ -40,16 +40,32 @@ class MessageBubble extends StatelessWidget {
           children: [
             RichText(
               text: TextSpan(
-                children: message.spans,
-                style: const TextStyle(fontSize: 16),
+                style: TextStyle(
+                  fontSize: 16,
+                  color: message.isUser ? Colors.white : Colors.black87,
+                ),
+                children: message.spans.map((span) {
+                  // Preserve existing styles while ensuring color consistency
+                  return TextSpan(
+                    text: span.text,
+                    style: span.style?.merge(
+                      TextStyle(
+                        color: span.style?.color ?? 
+                            (message.isUser ? Colors.white : Colors.black87),
+                      ),
+                    ),
+                  );
+                }).toList(),
               ),
             ),
             if (message.isComplete || message.isUser) ...[
               const SizedBox(height: 4),
               Text(
                 _formatTimestamp(message.timestamp),
-                style: const TextStyle(
-                  color: Color(0xFF757575),
+                style: TextStyle(
+                  color: message.isUser 
+                      ? Colors.white.withOpacity(0.8)
+                      : const Color(0xFF757575),
                   fontSize: 12,
                   fontWeight: FontWeight.w300,
                 ),
