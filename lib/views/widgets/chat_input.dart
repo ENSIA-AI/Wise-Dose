@@ -35,7 +35,7 @@ class _ChatInputState extends State<ChatInput> {
             child: TextField(
               controller: _messageController,
               decoration: InputDecoration(
-                hintText: 'Ask Gemini anything...',
+                hintText: 'Ask Wise bot anything...',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
