@@ -26,9 +26,6 @@ class DBHelper {
       },
       version: _database_version,
       onUpgrade: (db, oldVersion, newVersion) {
-        if (oldVersion < 2) {
-          db.execute('ALTER TABLE medications ADD COLUMN user_id TEXT NOT NULL DEFAULT ""');
-        }
       },
     );
     return database;
