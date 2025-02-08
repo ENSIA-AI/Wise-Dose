@@ -1,4 +1,3 @@
-
 // ignore_for_file: avoid_print
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wise_dose/database/userId.dart';
@@ -11,7 +10,7 @@ class MedicationBloc extends Bloc<MedicationEvent, MedicationState> {
     on<AddMedication>(
       (event, emit) async {
         final id = await getUserId();
-        MedDB.insertRecord({
+        final record = {
           'medication_name': event.name,
           'user_id': id,
           'start_date': event.startDate,
@@ -20,7 +19,9 @@ class MedicationBloc extends Bloc<MedicationEvent, MedicationState> {
           'details': event.details,
           'hours': event.time[0],
           'minutes': event.time[1]
-        });
+        };
+        MedDB.insertRecord(record);
+        MedDB.syncToSupabase([record], id!);
         emit(MedicationOnGoingState());
       },
     );

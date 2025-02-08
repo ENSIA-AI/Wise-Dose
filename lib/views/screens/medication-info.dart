@@ -274,6 +274,8 @@ class MedicationInfo extends StatelessWidget {
                                       details: _details,
                                       time: state
                                   ));
+
+                                  Navigator.pop(context);
                                 }
                               },
                               text: "Add Medication",

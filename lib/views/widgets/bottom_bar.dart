@@ -66,7 +66,7 @@ class _Bottom_Nav_BarState extends State<Bottom_Nav_Bar> {
             items: [
               BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.qr_code_scanner,
+                    Icons.chat_rounded,
                     size: 32,
                   ),
                   label: ""),

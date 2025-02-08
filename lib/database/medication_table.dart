@@ -9,7 +9,7 @@ class MedicationTable extends DBBaseTable {
   var db_table = 'medications';
 
   static String sql_code = '''
-    CREATE TABLE medications (
+    CREATE TABLE IF NOT EXISTS medications (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       user_id TEXT NOT NULL,
       medication_name TEXT NOT NULL,
@@ -61,7 +61,7 @@ class MedicationTable extends DBBaseTable {
   }
 
   final String flaskBaseUrl =
-      'https://wise-dose-backend-f83x.vercel.app'; // Replace with your Flask server URL
+      'https://wise-dose-backend-f83x.vercel.app';
 
   /// Sync local data to Flask API (push local data to the server)
   Future<void> syncToSupabase(
